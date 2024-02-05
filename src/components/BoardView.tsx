@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import CommentSection from './CommentSection';
 
-function BoardView({ show, boardname }) {
+function BoardView({ show, boardname, session }) {
     const [posts, setPosts] = useState<Post[]>([]);
     const [postTitle, setPostTitle] = useState('');
     const [postBody, setPostBody] = useState('');
 
 
+
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        if(!session) return; // users must be logged in to post
+
         // In a real application, you'd also send this to your backend to store
         const newPost: Post = {
             id: posts.length + 1,
@@ -16,7 +20,7 @@ function BoardView({ show, boardname }) {
             date: new Date(),
             board: boardname,
             body: postBody,
-            author: 'Anonymous',
+            author: session.user.username,
             comments: [],
 
         };

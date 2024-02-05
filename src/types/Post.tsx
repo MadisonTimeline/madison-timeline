@@ -9,5 +9,6 @@ export type Post = {
   body: string;
   image?: string;
   author: string;
+  authorId: string;
   comments: Comment[];
 };
