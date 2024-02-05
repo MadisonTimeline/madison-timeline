@@ -1,3 +1,5 @@
+import { Comment } from "./Comment";
+
 // Type definition for a post
 export type Post = {
   id: string;
@@ -6,5 +8,6 @@ export type Post = {
   board: string;
   body: string;
   image?: string;
-  
+  author: string;
+  comments: Comment[];
 };

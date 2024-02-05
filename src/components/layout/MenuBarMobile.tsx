@@ -15,13 +15,13 @@ export default function MenuBarMobile({ setter }) {
                 <MenuRoundedIcon />
             </button>
             <div className="p-2 flex flex-row mx-auto">
-                    <Link href="/">
-                        {/*eslint-disable-next-line*/}
-                        {/* <img src={logo.src} alt="Company Logo" width={300} height={300} /> */}
-                        <div className='border rounded-full p-1 bg-[#52ab98] '>MT</div>
-                    </Link>
-                    <div className='p-1 text-white'>Madison Timeline</div>
-                </div>
+                <Link href="/">
+                    {/*eslint-disable-next-line*/}
+                    {/* <img src={logo.src} alt="Company Logo" width={300} height={300} /> */}
+                    <div className='border rounded-full p-1 bg-[#C5050C] font-bold text-white'>MT</div>
+                </Link>
+                <div className='p-1 text-white'>Madison Timeline</div>
+            </div>
             <Link
                 className="text-3xl flex text-white"
                 href="/login"

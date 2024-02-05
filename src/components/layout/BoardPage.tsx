@@ -8,8 +8,8 @@ export default function BoardPage({ title }) {
             pageTitle={title}
         >
             <div className="min-h-screen flex flex-col">
-                <div>
-                    <h1 className="text-4xl">{title}</h1>
+                <div className='flex justify-center'>
+                    <h1 className="text-4xl p-1 ">{title}</h1>
                 </div>
                 <div>
                     <BoardView />

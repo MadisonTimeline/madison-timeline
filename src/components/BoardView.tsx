@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import CommentSection from './CommentSection';
 
-function BoardView( { show, boardname }){
+function BoardView({ show, boardname }) {
     const [posts, setPosts] = useState<Post[]>([]);
     const [postTitle, setPostTitle] = useState('');
     const [postBody, setPostBody] = useState('');
@@ -15,6 +16,8 @@ function BoardView( { show, boardname }){
             date: new Date(),
             board: boardname,
             body: postBody,
+            author: 'Anonymous',
+            comments: [],
 
         };
         setPosts([...posts, newPost]);
@@ -27,15 +30,20 @@ function BoardView( { show, boardname }){
             <h1>{boardname}</h1>
             <div className='h-[41vh] overflow-auto'>
                 {posts.map((post) => (
-                    <div key={post.id} className='border b-1'>
-                        <h2>{post.title}</h2>
-                        <p>{post.body}</p>
+                    <div key={post.id} className=' bg-white border b-1 rounded p-1'>
+                        <div className='flex flex-row justify-between'>
+                            <div>{post.author}</div>
+                            <h2 className='text-black font-bold'>{post.title}</h2>
+                            <div className=' text-black'>{post.date.toDateString()}</div>
+                        </div>
+                        <p className=' text-black'>{post.body}</p>
+                        <CommentSection postid={post.id} />
                     </div>
                 ))}
             </div>
             <form onSubmit={handleSubmit} className=' flex flex-col w-auto left-3 right-3'>
-                <h2 
-                className='text-xl font-bold text-center m-2 p-2 border b-1 rounded bg-white'
+                <h2
+                    className='text-xl font-bold text-center m-2 p-2 border b-1 rounded bg-white'
                 >Create a new post</h2>
                 <input
                     type="text"
