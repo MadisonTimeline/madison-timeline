@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import CommentSection from './CommentSection';
+import { Post } from '@/types/Post';
+import { createClient } from '@/utils/supabase/client';
 
-function BoardView({ show, boardname, session }) {
+function BoardView({ show, boardname }) {
+    const supabase = createClient();
     const [posts, setPosts] = useState<Post[]>([]);
     const [postTitle, setPostTitle] = useState('');
     const [postBody, setPostBody] = useState('');
+    const [loggedIn, setLoggedIn] = useState(supabase.auth.getUser() !== null);
 
-
-
+    // supabase.from('posts').on('INSERT', (payload) => {
+    //     setPosts([...posts, payload.new]);
+    // }).subscribe();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if(!session) return; // users must be logged in to post
 
         // In a real application, you'd also send this to your backend to store
         const newPost: Post = {
@@ -20,7 +24,7 @@ function BoardView({ show, boardname, session }) {
             date: new Date(),
             board: boardname,
             body: postBody,
-            author: session.user.username,
+            author: loggedIn ? 'Anon' : 'Anonymous',
             comments: [],
 
         };
