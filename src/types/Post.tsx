@@ -3,6 +3,6 @@ export type Post = {
   id: string;
   title: string;
   date: Date;
-  section: string;
+  board: string;
   body: string;
 };
