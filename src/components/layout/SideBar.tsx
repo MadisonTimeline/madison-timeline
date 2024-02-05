@@ -47,14 +47,14 @@ export default function Sidebar({ show, setter }) {
                     <Link href="/">
                         {/*eslint-disable-next-line*/}
                         {/* <img src={logo.src} alt="Company Logo" width={300} height={300} /> */}
-                        <div className='border rounded-full p-1 bg-[#52ab98] '>MT</div>
+                        <div className='border rounded-full p-1 bg-[#C5050C] font-bold text-white'>MT</div>
                     </Link>
                     <div className='p-1'>Madison Timeline</div>
                 </div>
                 <div className="flex flex-col">
                     <MenuItem
-                        name="Home"
-                        route="/"
+                        name="All"
+                        route="/boards"
                         icon={<HomeRoundedIcon />}
                     />
                     <MenuItem

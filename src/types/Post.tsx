@@ -5,4 +5,6 @@ export type Post = {
   date: Date;
   board: string;
   body: string;
+  image?: string;
+  
 };

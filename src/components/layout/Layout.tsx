@@ -4,18 +4,12 @@ import Sidebar from './Sidebar';
 import MenuBarMobile from './MenuBarMobile';
 
 export default function Layout({ pageTitle, children }) {
-    // Concatenate page title (if exists) to site title
-    let titleConcat = "Responsive Sidebar Example";
-    if (pageTitle) titleConcat = pageTitle + " | " + titleConcat;
 
     // Mobile sidebar visibility state
     const [showSidebar, setShowSidebar] = useState(false);
 
     return (
         <>
-            <Head>
-                <title>{titleConcat}</title>
-            </Head>
             <div className="min-h-screen">
                 <div className="flex">
                     <MenuBarMobile setter={setShowSidebar} />
