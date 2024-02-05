@@ -16,6 +16,7 @@ function CommentSection({ postid }) {
             postid: postid,
             date: new Date(),
             content: content,
+            author: 'Anon',
 
         };
         setComments([...comments, newComment]);

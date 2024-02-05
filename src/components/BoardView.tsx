@@ -36,7 +36,7 @@ function BoardView({ show, boardname }) {
     return (
         <div className=' flex flex-col justify-center align-center m-10'>
             <h1>{boardname}</h1>
-            <div className='h-[41vh] overflow-auto'>
+            <div className='h-[40vh] overflow-auto'>
                 {posts.map((post) => (
                     <div key={post.id} className=' bg-white border b-1 rounded p-1'>
                         <div className='flex flex-row justify-between'>
