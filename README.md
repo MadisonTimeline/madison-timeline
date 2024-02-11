@@ -9,7 +9,7 @@ Madison Timeline is a social networking program tailored specifically for studen
 - **Direct Messaging**: Users can communicate with each other through direct messaging, fostering connections and facilitating discussions.
 - **Classmate Search**: The platform allows users to search for classmates who are taking the same classes, making it easier to connect and collaborate on coursework.
 - **Profile Customization**: Users can personalize their profiles with information such as their major, interests, and extracurricular activities.
-- **Next JS and TypeScript**: The platform is built using Next.js, a React framework, and TypeScript, ensuring robustness, scalability, and type safety in the codebase.
+- **Next TS and Jest**: The platform is built using Next.js, a React framework, TypeScript, and Jest, ensuring robustness, scalability, and type safety in the codebase.
 
 ## Getting Started
 
