@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Madison Timeline
+
+Madison Timeline is a social networking program tailored specifically for students at the University of Wisconsin - Madison (UW Madison). It provides a platform where students can connect with each other, share information about restaurants, class notes, and other relevant content. The primary focus is on facilitating communication and collaboration among students within the UW Madison community.
+
+## Features
+
+- **Restaurant Recommendations**: Users can share their favorite restaurants and dining experiences in the Madison area.
+- **Class Notes Sharing**: Students can upload and exchange class notes, study guides, and other educational materials.
+- **Direct Messaging**: Users can communicate with each other through direct messaging, fostering connections and facilitating discussions.
+- **Classmate Search**: The platform allows users to search for classmates who are taking the same classes, making it easier to connect and collaborate on coursework.
+- **Profile Customization**: Users can personalize their profiles with information such as their major, interests, and extracurricular activities.
+- **Next JS and TypeScript**: The platform is built using Next.js, a React framework, and TypeScript, ensuring robustness, scalability, and type safety in the codebase.
 
 ## Getting Started
 
-First, run the development server:
+To get started with Madison Timeline, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Clone the repository:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    ```bash
+    git clone https://github.com/DK-Kim4312/madison-timeline.git
+    ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Navigate to the project directory:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+    ```bash
+    cd madison-timeline
+    ```
 
-## Learn More
+3. Install dependencies:
 
-To learn more about Next.js, take a look at the following resources:
+    ```bash
+    npm install
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Run the development server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    ```bash
+    npm run dev
+    ```
 
-## Deploy on Vercel
+5. Open your web browser and navigate to `http://localhost:3000` to access the application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+We welcome contributions from the community! If you'd like to contribute to Madison Timeline, please follow these guidelines:
+
+- Fork the repository and create a new branch for your feature or bug fix.
+- Ensure that your code adheres to the established coding standards and conventions.
+- Test your changes thoroughly and ensure that they do not introduce any regressions.
+- Submit a pull request detailing the changes you've made, along with a brief description.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Contact
+
+If you have any questions, suggestions, or feedback, feel free to reach out to us at [dkim693@wisc.edu](mailto:dkim693@wisc.edu).
+
+---
