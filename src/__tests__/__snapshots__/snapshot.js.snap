@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders homepage unchanged 1`] = `
+<div>
+  <main
+    class="flex min-h-screen min-w-screen flex-col items-center justify-between p-24"
+  >
+    <h1
+      class="text-6xl font-bold mt-[100px]"
+    >
+      Welcome to Madison Timeline
+    </h1>
+    <a
+      class="text-3xl text-white font-bold border rounded p-2 bg-[#C5050C] shadow"
+      href="/boards"
+    >
+       Get Started 
+    </a>
+  </main>
+</div>
+`;
