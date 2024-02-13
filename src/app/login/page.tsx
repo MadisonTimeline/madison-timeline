@@ -1,14 +1,57 @@
-import { login, signup } from './actions'
+"use client";
 
-export default function LoginPage() {
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+import type { Database } from "@/lib/database.types";
+
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+  const supabase = createClientComponentClient<Database>();
+
+  const handleSignUp = async () => {
+    await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: `${location.origin}/auth/callback`,
+      },
+    });
+    router.refresh();
+  };
+
+  const handleSignIn = async () => {
+    await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    router.refresh();
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.refresh();
+  };
+
   return (
-    <form className='flex flex-col p-10 justify-center align-center'>
-      <label htmlFor="email">Email:</label>
-      <input id="email" name="email" type="email" required className='border b-2'/>
-      <label htmlFor="password">Password:</label>
-      <input id="password" name="password" type="password" required className='border b-2'/>
-      <button formAction={login} className='border b-2'>Log in</button>
-      <button formAction={signup} className=' border b-2'>Sign up</button>
-    </form>
-  )
+    <>
+      <input
+        name="email"
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
+      />
+      <input
+        type="password"
+        name="password"
+        onChange={(e) => setPassword(e.target.value)}
+        value={password}
+      />
+      <button onClick={handleSignUp}>Sign up</button>
+      <button onClick={handleSignIn}>Sign in</button>
+      <button onClick={handleSignOut}>Sign out</button>
+    </>
+  );
 }

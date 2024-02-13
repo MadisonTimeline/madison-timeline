@@ -1,3 +1,5 @@
+// npx supabase login
+// npx supabase gen types typescript --project-id YOUR_PROJECT_ID > src/lib/database.types.ts
 export type Json =
   | string
   | number
