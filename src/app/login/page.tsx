@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import type { Database } from "@/lib/database.types";
+import { cp } from "fs";
+import { red } from "@mui/material/colors";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -13,31 +15,27 @@ export default function Login() {
   const supabase = createClientComponentClient<Database>();
 
   const handleSignUp = async () => {
-    await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${location.origin}/auth/callback`,
-      },
-    });
+    console.log("signing up"); // TODO: remove
+    router.replace("/auth/sign-up");
+
     router.refresh();
   };
 
   const handleSignIn = async () => {
-    await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    console.log("signing in"); // TODO: remove
+    router.replace("/auth/login");
+
     router.refresh();
   };
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
+    console.log("signing out"); // TODO: remove
+    router.replace("/auth/logout")
     router.refresh();
   };
 
   return (
-    <>
+    <div className=" flex flex-col ">
       <input
         name="email"
         onChange={(e) => setEmail(e.target.value)}
@@ -52,6 +50,6 @@ export default function Login() {
       <button onClick={handleSignUp}>Sign up</button>
       <button onClick={handleSignIn}>Sign in</button>
       <button onClick={handleSignOut}>Sign out</button>
-    </>
+    </div>
   );
 }
