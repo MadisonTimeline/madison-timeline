@@ -14,7 +14,7 @@ export default function Layout({ pageTitle, children }) {
                 <div className="flex">
                     <MenuBarMobile setter={setShowSidebar} />
                     <Sidebar show={showSidebar} setter={setShowSidebar} />
-                    <div className="flex flex-col flex-grow bg-[#C5050C77] w-screen md:w-full min-h-screen">
+                    <div className="flex flex-col flex-grow bg-white w-screen md:w-full min-h-screen">
                         {children}
                     </div>
                 </div>
