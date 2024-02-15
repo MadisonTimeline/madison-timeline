@@ -1,55 +1,139 @@
-"use client";
+import React, { useEffect, useState } from "react";
+import { validateEmail } from "../../lib/utils";
+import AuthLayout from "@/components/layout/AuthLayout";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-
-import type { Database } from "@/lib/database.types";
-import { cp } from "fs";
-import { red } from "@mui/material/colors";
-
-export default function Login() {
+function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [emailInPutError, setEmailInputError] = useState(false);
+  const [passwordInPutError, setPasswordInputError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
-  const supabase = createClientComponentClient<Database>();
 
-  const handleSignUp = async () => {
-    console.log("signing up"); // TODO: remove
-    router.replace("/auth/sign-up");
+  useEffect(() => {
+    validate();
+  }, [email, password]);
 
-    router.refresh();
-  };
+  async function handleSubmit(e) {
+    setIsLoading(true);
+    e.preventDefault();
+    let res = await signIn("credentials", {
+      email,
+      password,
+      callbackUrl: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}`,
+      redirect: false,
+    });
+    setIsLoading(false);
 
-  const handleSignIn = async () => {
-    console.log("signing in"); // TODO: remove
-    router.replace("/auth/login");
+    if (res?.ok) {
+      // toastsuccess
+      console.log("success");
+      router.push("/");
+      return;
+    } else {
+      // Toast failed
+      setError("Failed! Check you input and try again.");
+      // return;
+      console.log("Failed", res);
+    }
+    return res;
+  }
 
-    router.refresh();
-  };
+  function validate() {
+    let emailIsValid = validateEmail(email);
 
-  const handleSignOut = async () => {
-    console.log("signing out"); // TODO: remove
-    router.replace("/auth/logout")
-    router.refresh();
-  };
+    if (!emailIsValid) {
+      setEmailInputError(true);
+      return;
+    }
+    if (password.length < 6) {
+      setPasswordInputError(true);
+    } else {
+      setEmailInputError(false);
+      setPasswordInputError(false);
+    }
+  }
 
+  if (isLoading) {
+    return (
+      <AuthLayout>
+        <p className="flex h-full">Loading...</p>;
+      </AuthLayout>
+    );
+  }
   return (
-    <div className=" flex flex-col ">
-      <input
-        name="email"
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
-      />
-      <input
-        type="password"
-        name="password"
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-      />
-      <button onClick={handleSignUp}>Sign up</button>
-      <button onClick={handleSignIn}>Sign in</button>
-      <button onClick={handleSignOut}>Sign out</button>
-    </div>
+    <AuthLayout>
+      <div className="flex justify-center items-center m-auto p-3">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        >
+          {error && (
+            <div className="flex w-full py-3 p-1 rounded-md bg-red-500 text-white">
+              {error}
+            </div>
+          )}
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <input
+              className={`border-${
+                emailInPutError ? "red-500" : ""
+              } shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+              id="email"
+              type="text"
+              placeholder="Email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <input
+              className={` border-${
+                passwordInPutError ? "red-500" : ""
+              } shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
+              id="password"
+              type="password"
+              placeholder="******************"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <button
+              className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2  px-4 rounded  focus:outline-none  focus:shadow-outline"
+              type="submit"
+              disabled={isLoading ? true : false}
+            >
+              {isLoading ? "Loading..." : "Sign In"}
+            </button>
+            <a
+              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+              href="#"
+            >
+              Forgot Password?
+            </a>
+          </div>
+        </form>
+      </div>
+    </AuthLayout>
   );
 }
+
+export default LoginPage;
