@@ -1,21 +1,19 @@
+"use client"
+
+import { useSession } from "next-auth/react"
 import React, { useState } from 'react';
 import CommentSection from './CommentSection';
 import { Post } from '@/types/Post';
-import { createClient } from '@/utils/supabase/client';
 import CreatePost from './CreatePost';
 import { Button } from './ui/button';
 
 function BoardView({ show, boardname }) {
-    const supabase = createClient();
+    const { data: session, status } = useSession();
     const [posts, setPosts] = useState<Post[]>([]);
     const [postTitle, setPostTitle] = useState('');
     const [postBody, setPostBody] = useState('');
-    const [loggedIn, setLoggedIn] = useState(supabase.auth.getUser() !== null);
     const [createPostModal, setCreatePostModal] = useState(false);
 
-    // supabase.from('posts').on('INSERT', (payload) => {
-    //     setPosts([...posts, payload.new]);
-    // }).subscribe();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -29,7 +27,6 @@ function BoardView({ show, boardname }) {
             body: postBody,
             author: loggedIn ? 'Anon' : 'Anonymous',
             comments: [],
-
         };
         setPosts([...posts, newPost]);
         setPostTitle('');
@@ -55,13 +52,18 @@ function BoardView({ show, boardname }) {
             </div>
 
             <div className='absolute right-20 bottom-0'>
-                {!createPostModal && <Button onClick={() => setCreatePostModal(true)}>Create Post</Button>}
-                {createPostModal && (
-                    <>
-                        <Button onClick={() => setCreatePostModal(false)} className='absolute right-3 top-3'>X</Button>
-                        <CreatePost />
-                    </>
+                {status === "loading" ? (
+                    <Button>Loading...</Button>
+                ) : (
+                    !createPostModal ? (<Button onClick={() => setCreatePostModal(true)}>Create Post</Button>)
+                        : (
+                            <>
+                                <Button onClick={() => setCreatePostModal(false)} className='absolute right-3 top-3'>X</Button>
+                                <CreatePost />
+                            </>
+                        )
                 )}
+
             </div>
         </div>
     );

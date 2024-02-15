@@ -1,16 +1,20 @@
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
+import { auth } from "auth"
+import ClientExample from "@/components/client-example"
+import { SessionProvider } from "next-auth/react"
 
-import { createClient } from '@/utils/supabase/server'
-
-export default async function PrivatePage() {
-  const cookieStore = cookies()
-  const supabase = createClient(cookieStore)
-
-  const { data, error } = await supabase.auth.getUser()
-  if (error || !data?.user) {
-    redirect('/')
+export default async function ClientPage() {
+  const session = await auth()
+  if (session?.user) {
+    session.user = {
+      name: session.user.name,
+      email: session.user.email,
+      image: session.user.image,
+    }
   }
 
-  return <p>Hello {data.user.email}</p>
+  return (
+    <SessionProvider session={session}>
+      <ClientExample />
+    </SessionProvider>
+  )
 }
