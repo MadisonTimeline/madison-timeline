@@ -2,8 +2,14 @@ import React from 'react'
 import Link from 'next/link'
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { RegisterLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+
 
 export default function MenuBarMobile({ setter }: { setter: React.Dispatch<React.SetStateAction<boolean>> }) {
+    const { isLoading, user } = useKindeBrowserClient();
+
     return (
         <nav className="md:hidden z-20 fixed top-0 left-0 right-0 h-[60px] bg-black flex [&>*]:my-auto px-2">
             <button
@@ -26,8 +32,19 @@ export default function MenuBarMobile({ setter }: { setter: React.Dispatch<React
                 className="text-3xl flex text-white"
                 href="/login"
             >
-                <AccountCircleRoundedIcon />
+
             </Link>
+            {
+                user ? (
+                    <LogoutLink >
+                        <AccountCircleRoundedIcon />
+                    </LogoutLink>
+                ) : (
+                    <RegisterLink >
+                        <AccountCircleRoundedIcon />
+                    </RegisterLink>
+                )
+            }
         </nav>
     )
 }
