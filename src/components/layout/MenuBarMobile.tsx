@@ -27,18 +27,22 @@ export default function MenuBarMobile({ setter }: { setter: React.Dispatch<React
                     <div className='border rounded-full p-1 bg-[#C5050C] font-bold text-white'>MT</div>
                 </Link>
                 <div className='p-1 text-white'>Madison Timeline</div>
+
             </div>
-            {
-                user ? (
-                    <LogoutLink >
-                        <AccountCircleRoundedIcon />
-                    </LogoutLink>
-                ) : (
-                    <RegisterLink >
-                        <AccountCircleRoundedIcon />
-                    </RegisterLink>
-                )
-            }
+            <div className='text-white'>
+                {
+                    user ? (
+                        <LogoutLink >
+                            <AccountCircleRoundedIcon />
+                        </LogoutLink>
+                    ) : (
+                        <RegisterLink >
+                            <AccountCircleRoundedIcon />
+                        </RegisterLink>
+                    )
+                }
+            </div>
+
         </nav>
     )
 }
