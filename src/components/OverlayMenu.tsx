@@ -9,7 +9,7 @@ interface OverlayMenuProps {
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const OverlayMenu: React.FC<OverlayMenuProps> = ({ show, setShow }) => {
+const OverlayMenu: React.FC<OverlayMenuProps> = ( {show, setShow } ) => {
   return (
     <div
       className={`${

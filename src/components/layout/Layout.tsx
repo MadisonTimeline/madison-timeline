@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
-import Sidebar from '@/components/layout/Sidebar.tsx';
+import Sidebar from './Sidebar';
 
 import MenuBarMobile from './MenuBarMobile';
 
-export default function Layout({ pageTitle, children }) {
+export default function Layout({ pageTitle, children }: { pageTitle: string, children: React.ReactNode }) {
 
     // Mobile sidebar visibility state
     const [showSidebar, setShowSidebar] = useState(false);

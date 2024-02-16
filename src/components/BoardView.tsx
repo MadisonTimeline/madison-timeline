@@ -6,7 +6,7 @@ import CreatePost from './CreatePost';
 import { Button } from './ui/button';
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
-function BoardView({ boardname }) {
+function BoardView({ boardname }: { boardname: string }) {
     const [posts, setPosts] = useState<Post[]>([]);
 
     const [createPostModal, setCreatePostModal] = useState(false);
@@ -28,7 +28,7 @@ function BoardView({ boardname }) {
                             <div className=' text-black'>{post.date.toDateString()}</div>
                         </div>
                         <p className=' text-black'>{post.body}</p>
-                        <CommentSection postid={post.id} />
+                        <CommentSection postid={post.id} user={user} />
                     </div>
                 ))}
             </div>

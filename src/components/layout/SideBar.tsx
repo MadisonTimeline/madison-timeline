@@ -9,7 +9,7 @@ import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact
 import FoodBankOutlinedIcon from '@mui/icons-material/FoodBankOutlined';
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
-export default function Sidebar({ show, setter }) {
+export default function Sidebar({ show, setter }: { show: boolean, setter: React.Dispatch<React.SetStateAction<boolean>> }) {
     // get user login status
     const { isLoading, user } = useKindeBrowserClient();
 
@@ -19,7 +19,7 @@ export default function Sidebar({ show, setter }) {
     const appendClass = show ? " ml-0" : " ml-[-250px] md:ml-0";
 
     // Clickable menu items
-    const MenuItem = ({ icon, name, route }) => {
+    const MenuItem = ({ icon, name, route }: {icon: any, name: string, route: any }) => {
         // Highlight menu item based on currently displayed route
 
         return (

@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from './Layout'
 import BoardView from '../BoardView'
 
-export default async function BoardPage({ title }) {
+export default async function BoardPage({ title }: { title: string }) {
 
     return (
         <Layout

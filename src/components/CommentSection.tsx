@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import { Comment } from '@/types/Comment';
 import { randomInt } from 'crypto';
 
-function CommentSection({ postid }) {
+function CommentSection({ postid, user }: { postid: string, user: any }) {
     const [content, setContent] = useState('');
     const [comments, setComments] = useState<Comment[]>([]);
     const [showComments, setShowComments] = useState(false);
@@ -16,7 +15,8 @@ function CommentSection({ postid }) {
             postid: postid,
             date: new Date(),
             content: content,
-            author: 'Anon',
+            author: user.given_name,
+            authorId: user.id,
 
         };
         setComments([...comments, newComment]);
@@ -34,7 +34,7 @@ function CommentSection({ postid }) {
                     <button onClick={() => setShowComments(true)}>Show Comments</button>
             }
             {showComments && comments.map((comment) => (
-                <div className='h-auto overflow-auto'>
+                <div key={comment.id} className='h-auto overflow-auto'>
                     <div key={comment.id} className=' bg-white border b-1 rounded p-1'>
                         <div className='flex flex-row justify-between'>
                             <div>{comment.author}</div>

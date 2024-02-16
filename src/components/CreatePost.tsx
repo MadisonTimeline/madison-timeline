@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label"
 import { Post } from "@/types/Post"
 import { useState } from "react"
 
-export default function CreatePost( { posts, setPosts, boardname, user } ) {
+export default function CreatePost( { posts, setPosts, boardname, user }: { posts: Post[], setPosts: (posts: Post[]) => void, boardname: string, user: any }){
 
   const [postTitle, setPostTitle] = useState('');
   const [postBody, setPostBody] = useState('');
