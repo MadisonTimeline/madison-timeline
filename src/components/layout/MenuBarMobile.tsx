@@ -28,12 +28,6 @@ export default function MenuBarMobile({ setter }: { setter: React.Dispatch<React
                 </Link>
                 <div className='p-1 text-white'>Madison Timeline</div>
             </div>
-            <Link
-                className="text-3xl flex text-white"
-                href="/login"
-            >
-
-            </Link>
             {
                 user ? (
                     <LogoutLink >
