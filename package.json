@@ -13,6 +13,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@kinde-oss/kinde-auth-nextjs": "^2.1.11",
     "@mui/icons-material": "^5.15.7",
     "@mui/material": "^5.15.7",
     "@prisma/client": "^5.9.1",

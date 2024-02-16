@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { RegisterLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import TextSnippetOutlinedIcon from '@mui/icons-material/TextSnippetOutlined';
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import FoodBankOutlinedIcon from '@mui/icons-material/FoodBankOutlined';
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 export default function Sidebar({ show, setter }) {
+    // get user login status
+    const { isLoading, user } = useKindeBrowserClient();
+
     // Define our base class
     const className = "bg-white w-[250px] transition-[margin-left] ease-in-out duration-500 fixed md:static top-0 bottom-0 left-0 z-40";
     // Append class based on state of sidebar visiblity
@@ -72,6 +78,16 @@ export default function Sidebar({ show, setter }) {
                         route="/boards/notes"
                         icon={<TextSnippetOutlinedIcon />}
                     />
+                    {
+                        !user ? (
+                            <>
+                                <LoginLink>Sign in</LoginLink>
+                                <RegisterLink>Sign up</RegisterLink>
+                            </>
+                        ) : (
+                            <LogoutLink>Log out</LogoutLink>
+                        )
+                    }
                 </div>
             </div>
             {show ? <ModalOverlay /> : <></>}
