@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
-import Sidebar from './Sidebar';
+import Sidebar from '@/components/layout/Sidebar.tsx';
+
 import MenuBarMobile from './MenuBarMobile';
 
 export default function Layout({ pageTitle, children }) {
