@@ -38,7 +38,7 @@ function BoardView({ boardname }: { boardname: string }) {
                 {!user ? (
                     <div className='text-red-500'>You must be logged in to post</div>
                 ) : (
-                    !createPostModal ? (<Button onClick={() => setCreatePostModal(true)}>Create Post</Button>)
+                    !createPostModal ? (<Button onClick={() => setCreatePostModal(true)} className='shadow-md mb-2'>Create Post</Button>)
                         : (
                             <>
                                 <Button onClick={() => setCreatePostModal(false)} className='absolute right-3 top-3'>X</Button>

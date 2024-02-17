@@ -8,18 +8,19 @@ import TextSnippetOutlinedIcon from '@mui/icons-material/TextSnippetOutlined';
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import FoodBankOutlinedIcon from '@mui/icons-material/FoodBankOutlined';
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { Button } from '../ui/button';
 
 export default function Sidebar({ show, setter }: { show: boolean, setter: React.Dispatch<React.SetStateAction<boolean>> }) {
     // get user login status
     const { isLoading, user } = useKindeBrowserClient();
 
     // Define our base class
-    const className = "bg-white w-[250px] transition-[margin-left] ease-in-out duration-500 fixed md:static top-0 bottom-0 left-0 z-40";
+    const className = "border border-r-2 border-y-0 border-l-0 rounded-lg bg-white w-[250px] transition-[margin-left] ease-in-out duration-500 fixed md:static top-0 bottom-0 left-0 z-40";
     // Append class based on state of sidebar visiblity
     const appendClass = show ? " ml-0" : " ml-[-250px] md:ml-0";
 
     // Clickable menu items
-    const MenuItem = ({ icon, name, route }: {icon: any, name: string, route: any }) => {
+    const MenuItem = ({ icon, name, route }: { icon: any, name: string, route: any }) => {
         // Highlight menu item based on currently displayed route
 
         return (
@@ -28,12 +29,14 @@ export default function Sidebar({ show, setter }: { show: boolean, setter: React
                 onClick={() => {
                     setter(oldVal => !oldVal);
                 }}
-                className={`flex gap-1 [&>*]:my-auto text-md pl-6 py-3 border-b-[1px] border-b-white/10`}
+                className={`flex gap-1 [&>*]:my-auto text-md pl-6 py-3 border-b-[1px] border-b-white/10 hover:bg-[#C5050C] hover:text-white transition-colors duration-300 ease-in-out active:bg-[#C5050C] active:text-white`}
             >
                 <div className="text-xl flex [&>*]:mx-auto w-[30px]">
                     {icon}
                 </div>
-                <div>{name}</div>
+                <div>
+                    {name}
+                </div>
             </Link>
         )
     }
@@ -78,16 +81,26 @@ export default function Sidebar({ show, setter }: { show: boolean, setter: React
                         route="/boards/notes"
                         icon={<TextSnippetOutlinedIcon />}
                     />
-                    {
-                        !user ? (
-                            <>
-                                <LoginLink>Sign in</LoginLink>
-                                <RegisterLink>Sign up</RegisterLink>
-                            </>
-                        ) : (
-                            <LogoutLink>Log out</LogoutLink>
-                        )
-                    }
+                    <div className='flex flex-row p-5 justify-between'>
+                        {
+                            !user ? (
+                                <>
+                                    <Button>
+                                        <LoginLink>Sign in</LoginLink>
+                                    </Button>
+                                    <Button>
+                                        <RegisterLink>Sign up</RegisterLink>
+                                    </Button>
+
+
+                                </>
+                            ) : (
+                                <Button>
+                                    <LogoutLink>Log out</LogoutLink>
+                                </Button>
+                            )
+                        }
+                    </div>
                 </div>
             </div>
             {show ? <ModalOverlay /> : <></>}
