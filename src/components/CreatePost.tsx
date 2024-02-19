@@ -51,7 +51,7 @@ export default function CreatePost( { posts, setPosts, boardname, user }: { post
               <Input id="name" placeholder="Title" onChange={(e) => setPostTitle(e.target.value)} />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <textarea id="body" placeholder="What's on your mind?" onChange={(e) => setPostBody(e.target.value)} className="h-[350px] bg-white font-lg border-none focus:outline-none ring-none"/>
+              <textarea id="body" placeholder="What's on your mind?" onChange={(e) => setPostBody(e.target.value)} className="p-2 h-[350px] bg-white font-lg border border-border rounded-md focus:outline-none ring-none"/>
             </div>
           </div>
         </form>

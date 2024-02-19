@@ -35,12 +35,16 @@ function CommentSection({ postid, user }: { postid: string, user: any }) {
                         <button onClick={() => setShowComments(true)}>Show Comments</button>
                 }
             </div>
+            {
+                showComments && comments.length !== 0 && 
+                <hr className='border border-border mt-1 mb-1' />
+            }
             {showComments && comments.map((comment) => (
                 <div key={comment.id} className='h-auto overflow-auto text-sm'>
                     <div key={comment.id} className=' bg-white p-1'>
                         <div className='flex flex-row justify-between'>
                             <div>{comment.author}</div>
-                            <div className=' text-black'>{comment.date.toLocaleDateString() + " " + comment.date.toLocaleTimeString()}</div>
+                            <div className='text-black'>{comment.date.toLocaleDateString() + " " + comment.date.toLocaleTimeString()}</div>
                         </div>
                         <p className=' text-black'>{comment.content}</p>
                     </div>
@@ -52,11 +56,11 @@ function CommentSection({ postid, user }: { postid: string, user: any }) {
                     <textarea
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
-                        className='w-full text-sm'
+                        className='w-full text-sm bg-input border border-border focus:outline-none ring-none'
                         placeholder="Add a Comment"
                         required
                     />
-                    <button type="submit" className='bg-white'><SendRoundedIcon /></button>
+                    <button type="submit" className='bg-input'><SendRoundedIcon /></button>
                 </div>
 
             </form>
