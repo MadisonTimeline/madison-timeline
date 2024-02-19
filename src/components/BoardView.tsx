@@ -21,13 +21,13 @@ function BoardView({ boardname }: { boardname: string }) {
             <div className='h-[40vh] overflow-auto'>
 
                 {posts.map((post) => (
-                    <div key={post.id} className=' bg-white border b-2 rounded p-1 shadow-md'>
+                    <div key={post.id} className='bg-secondary border b-2 rounded p-1 shadow-md'>
                         <div className='flex flex-row justify-between'>
                             <div>{post.author}</div>
-                            <h2 className='text-black font-bold'>{post.title}</h2>
-                            <div className=' text-black'>{post.date.toLocaleDateString() + " " + post.date.toLocaleTimeString()}</div>
+                            <h2 className='font-bold'>{post.title}</h2>
+                            <div className=''>{post.date.toLocaleDateString() + " " + post.date.toLocaleTimeString()}</div>
                         </div>
-                        <p className=' text-black'>{post.body}</p>
+                        <p className=''>{post.body}</p>
                         <CommentSection postid={post.id} user={user} />
                     </div>
                 ))}

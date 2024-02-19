@@ -58,7 +58,7 @@ export default function Sidebar({ show, setter }: { show: boolean, setter: React
                         {/* <img src={logo.src} alt="Company Logo" width={300} height={300} /> */}
                         <div className='border rounded-full p-1 bg-[#C5050C] font-bold text-white'>MT</div>
                     </Link>
-                    <div className='p-1'>Madison Timeline</div>
+                    <Link href="/" className='p-1'>Madison Timeline</Link>
                 </div>
                 <div className="flex flex-col">
                     <MenuItem
