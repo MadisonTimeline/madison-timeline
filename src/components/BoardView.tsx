@@ -33,7 +33,7 @@ function BoardView({ boardname }: { boardname: string }) {
                 ))}
             </div>
 
-            <div className='absolute right-20 bottom-0'>
+            <div className='absolute right-5 bottom-0'>
 
                 {!user ? (
                     <div className='text-red-500'>You must be logged in to post</div>
