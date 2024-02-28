@@ -12,14 +12,10 @@ function BoardView({ boardname }: { boardname: string }) {
     const [createPostModal, setCreatePostModal] = useState(false);
     const { isLoading, user } = useKindeBrowserClient();
 
-
-
     if (isLoading) return <div>Loading...</div>;
-
     return (
         <div className=' flex flex-col justify-center align-center m-10'>
             <div className='h-[77vh] overflow-auto'>
-
                 {posts.map((post) => (
                     <div key={post.id} className='bg-card-background border b-2 rounded p-1 shadow-md mb-2'>
                         <div className='flex flex-row justify-between'>

@@ -8,6 +8,7 @@ export type Post = {
   board: string;
   body: string;
   image?: string;
+  likes: number;
   author: string;
   authorId: string;
   comments: Comment[];
