@@ -16,9 +16,11 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import { Post } from "@/types/Post"
+import Link from "next/link"
 
 
-export default function PostPreview() {
+export default function PostPreview({ post }: { post: Post }) {
     const [liked, setLiked] = useState(false);
     const [disliked, setDisliked] = useState(false);
 
@@ -28,15 +30,22 @@ export default function PostPreview() {
     function handleDislike() {
         setDisliked(!disliked);
     }
+    function handleClickTitle() {
+
+    }
 
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Title</CardTitle>
-                <CardDescription>UserName</CardDescription>
+                <Link href={`/post/${post.id}`}>
+
+                    <CardTitle>{post.title}</CardTitle>
+                </Link>
+                <CardDescription>{post.author}</CardDescription>
+                <CardDescription>{post.date.toLocaleDateString() + " " + post.date.toLocaleTimeString()}</CardDescription>
             </CardHeader>
             <CardContent>
-                <p> Post Body Preview</p>
+                <p> {post.body}</p>
             </CardContent>
             <CardFooter className='flex items-center gap-2'>
 
