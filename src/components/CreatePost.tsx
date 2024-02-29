@@ -29,6 +29,8 @@ export default function CreatePost( { posts, setPosts, boardname, user }: { post
       board: boardname,
       body: postBody,
       likes: 0,
+      dislikes: 0,
+      views: 0,
       author: user.given_name,
       authorId: user.id,
       comments: [],
