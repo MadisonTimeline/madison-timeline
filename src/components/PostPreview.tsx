@@ -20,6 +20,7 @@ import { Post } from "@/types/Post"
 import Link from "next/link"
 
 
+
 export default function PostPreview({ post }: { post: Post }) {
     const [liked, setLiked] = useState(false);
     const [disliked, setDisliked] = useState(false);
@@ -30,19 +31,15 @@ export default function PostPreview({ post }: { post: Post }) {
     function handleDislike() {
         setDisliked(!disliked);
     }
-    function handleClickTitle() {
-
-    }
 
     return (
         <Card>
             <CardHeader>
                 <Link href={`/post/${post.id}`}>
-
                     <CardTitle>{post.title}</CardTitle>
                 </Link>
                 <CardDescription>{post.author}</CardDescription>
-                <CardDescription>{post.date.toLocaleDateString() + " " + post.date.toLocaleTimeString()}</CardDescription>
+                <CardDescription>{post.date.toLocaleString()}</CardDescription>
             </CardHeader>
             <CardContent>
                 <p> {post.body}</p>
