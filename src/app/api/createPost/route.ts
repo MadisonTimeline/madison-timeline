@@ -2,7 +2,6 @@
 
 export const dynamic = "force-dynamic"; // Use this if you need to ensure the function is always executed dynamically
 import { createClient } from "@/utils/supabase/client";
-import { v4 as uuidv4 } from "uuid";
 
 // Import types for Request and Response if needed
 // import { Request, Response } from '...';
@@ -16,26 +15,20 @@ export async function POST(request: Request) {
         console.log("Received data:");
         console.log(receivedData);
 
-        const idUUID = uuidv4();
-        const boardUUID = uuidv4();
-        const authorUUID = uuidv4();
-
-        const UUIDfake = "5a37cdb4-1953-4fbe-a132-a1836711a096";
-
         // Client-side Supabase query
         const supabase = createClient();
         const { data, error } = await supabase
             .from("posts")
             .insert({
-                id: UUIDfake,
+                id: receivedData.id,
                 title: receivedData.title,
                 date: receivedData.date,
-                board_id: UUIDfake,
+                board_name: receivedData.board,
                 body: receivedData.body,
                 likes: receivedData.likes,
                 dislikes: receivedData.dislikes,
                 views: receivedData.views,
-                author_id: UUIDfake,
+                author_id: receivedData.authorId,
             })
             .select();
         if (error) {
@@ -51,7 +44,7 @@ export async function POST(request: Request) {
         // Return response
         return new Response(
             JSON.stringify({
-                message: `Server received post from board [${insertedData.board_id}] by [${insertedData.author_id}] successfully.`,
+                message: `Server received post from board [${insertedData.board_name}] by [${insertedData.author_id}] successfully.`,
                 post: insertedData,
             }),
             {

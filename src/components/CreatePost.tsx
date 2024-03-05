@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Post } from "@/types/Post";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export default function CreatePost({
     posts,
@@ -24,7 +25,7 @@ export default function CreatePost({
 
         // In a real application, you'd also send this to your backend to store
         const newPost: Post = {
-            id: Math.random().toString(36).substr(2, 9),
+            id: uuidv4(),
             title: postTitle,
             date: new Date(),
             board: boardname,
