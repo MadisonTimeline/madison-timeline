@@ -52,13 +52,9 @@ export async function POST(request: Request) {
             }
         );
     } catch (error) {
-        // Handle errors
-        console.error("Error handling request:");
-        console.error(error);
-
         // Return error response to client
         return new Response(
-            JSON.stringify({ message: error.message || "Error processing request" }),
+            JSON.stringify({ "Error processing request" }),
             {
                 headers: { "Content-Type": "application/json" },
                 status: 400
