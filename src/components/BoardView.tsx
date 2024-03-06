@@ -35,17 +35,9 @@ function BoardView({ boardname }: { boardname: string }) {
     return (
         <div className=" flex flex-col justify-center align-center m-10">
             <div className="h-[77vh] overflow-auto">
-                {posts.map((post) => (
+
+                { posts && posts.map((post) => (
                     <PostPreview key={post.id} post={post} />
-                    // <div key={post.id} className='bg-card-background border b-2 rounded p-1 shadow-md mb-2'>
-                    //     <div className='flex flex-row justify-between'>
-                    //         <div>{post.author}</div>
-                    //         <h2 className='font-bold'>{post.title}</h2>
-                    //         <div className=''>{post.date.toLocaleDateString() + " " + post.date.toLocaleTimeString()}</div>
-                    //     </div>
-                    //     <p className=''>{post.body}</p>
-                    //     <CommentSection postid={post.id} user={user} />
-                    // </div>
                 ))}
             </div>
 
