@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import User from "@/types/User";
+import { User } from "@/types/User";
 
 export default function Profile({ user }: { user: any }) {
 
