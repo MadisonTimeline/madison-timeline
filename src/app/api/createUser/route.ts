@@ -54,7 +54,7 @@ export async function POST(request: Request) {
     } catch (error) {
         // Return error response to client
         return new Response(
-            JSON.stringify({ "Error processing request" }),
+            JSON.stringify({ message: "Error processing request"}),
             {
                 headers: { "Content-Type": "application/json" },
                 status: 400
