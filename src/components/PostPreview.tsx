@@ -41,7 +41,7 @@ export default function PostPreview({ post }: { post: Post }) {
                 <CardDescription>{post.date.toLocaleString()}</CardDescription>
             </CardHeader>
             <CardContent>
-                <p> {post.body}</p>
+                <p className="truncate"> {post.body}</p>
             </CardContent>
             <CardFooter className='flex items-center gap-2'>
 
