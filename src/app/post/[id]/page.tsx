@@ -6,7 +6,9 @@ import Post from '@/components/Post'
 
 export default function PostPage() {
     const {id}= useParams();
+    console.log(id);
+    let postid = (id as string);
     return (
-        <Post postid={idd} />
+        <Post postid={id} />
     )
 }
