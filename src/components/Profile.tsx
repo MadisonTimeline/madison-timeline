@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,7 +17,7 @@ export default function Profile({ user }: { user: any }) {
     const [email, setEmail] = useState(user.email);
     const [username, setUsername] = useState("loading...");
 
-    useEffect( async () => {
+    useMemo( async () => {
         let userID = {
             id: user.id
         }
