@@ -5,13 +5,11 @@ export type Post = {
   id: string;
   title: string;
   date: Date;
-  board: string;
+  board_name: string;
   body: string;
   image?: string;
   likes: number;
   dislikes: number;
   views: number;
-  author: string;
   authorId: string;
-  comments: Comment[];
 };
