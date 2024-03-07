@@ -32,7 +32,6 @@ export async function GET(request: Request) {
 
     } catch (error) {
         return new Response(
-            JSON.stringify({ message: error.message }),
             {
                 headers: { "Content-Type": "application/json" },
                 status: 500
