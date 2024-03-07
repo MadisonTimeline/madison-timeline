@@ -11,13 +11,10 @@ export default function Profile({ user }: { user: any }) {
     //if user exists, populate the form with the user data
     //if user does not exist, create a new user with the data from the auth provider
 
-
     const [familyName, setFamilyName] = useState(user.family_name);
     const [givenName, setGivenName] = useState(user.given_name);
     const [picture, setPicture] = useState(user.picture);
     const [email, setEmail] = useState(user.email);
-
-
 
     const handleSaveProfile = async (e: React.FormEvent) => {
         e.preventDefault();

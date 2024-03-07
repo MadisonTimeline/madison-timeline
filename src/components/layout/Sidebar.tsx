@@ -89,7 +89,7 @@ export default function Sidebar({ show, setter }: { show: boolean, setter: React
                                         <LoginLink>Sign in</LoginLink>
                                     </Button>
                                     <Button>
-                                        <RegisterLink>Sign up</RegisterLink>
+                                        <RegisterLink postLoginRedirectURL="/profile">Sign up</RegisterLink>
                                     </Button>
 
 
