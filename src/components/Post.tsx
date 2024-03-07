@@ -3,6 +3,10 @@
 import React from 'react'
 import { Post } from '@/types/Post'
 import { useEffect, useState } from 'react'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
+import { Label } from './ui/label'
+import { Button } from './ui/button'
+
 
 export default function Post({ postid }: { postid: string }) {
     // fetch the post from the server
@@ -46,9 +50,20 @@ export default function Post({ postid }: { postid: string }) {
 
 
     return (
-        <div>
-            <h1>{post.title}</h1>
-            <p>{post.body}</p>
-        </div>
+        <Card>
+            <CardHeader>
+                <CardTitle>{post.title}</CardTitle>
+                <CardDescription>{post.date.toLocaleString()}</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <p> {post.body}</p>
+            </CardContent>
+            <CardFooter className='flex items-center gap-2'>
+                <Label> {post.likes} likes</Label>
+                <Label> {post.dislikes} dislikes</Label>
+                <Label> {post.views} views</Label>
+            </CardFooter>
+        </Card>
+        
     )
 }
