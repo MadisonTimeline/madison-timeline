@@ -5,12 +5,13 @@ import { Label } from "@/components/ui/label";
 
 import { User } from "@/types/User";
 
-export default function Profile( { user }: { user: any }) {
+export default function Profile({ user }: { user: any }) {
 
     // TODO: check if user already exists in the database
     //if user exists, populate the form with the user data
     //if user does not exist, create a new user with the data from the auth provider
 
+    const [username, setUsername] = useState("");
     const [familyName, setFamilyName] = useState(user.family_name);
     const [givenName, setGivenName] = useState(user.given_name);
     const [picture, setPicture] = useState(user.picture);
@@ -21,12 +22,12 @@ export default function Profile( { user }: { user: any }) {
 
         const newUser: User = {
             id: user.id,
+            username: username,
             family_name: familyName,
             given_name: givenName,
             picture: picture,
             email: email
         };
-
         const response = await fetch("/api/createUser", {
             method: "POST",
             headers: {
@@ -45,8 +46,6 @@ export default function Profile( { user }: { user: any }) {
         } else {
             console.error("Error creating user");
         }
-
-
     }
 
 
@@ -56,6 +55,11 @@ export default function Profile( { user }: { user: any }) {
             <div className="flex flex-col justify-center items-center gap-5">
                 <img src={picture} alt="profile picture" className="w-20 h-20 rounded-full" />
                 <form>
+                    <div>
+                        {/* Add checking username exist*/}
+                        <Label>Username</Label>
+                        <Input value={username} required onChange={(e) => setUsername(e.target.value)} />
+                    </div>
                     <div>
                         <Label>Family Name</Label>
                         <Input value={familyName} onChange={(e) => setFamilyName(e.target.value)} />

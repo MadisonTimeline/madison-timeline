@@ -11,12 +11,6 @@ export default function NewProfilePage() {
     if (isLoading) return <div>Loading...</div>;
 
     if (isAuthenticated && user) {
-        let familyName = user.family_name;
-        let givenName = user.given_name;
-        let picture = user.picture;
-        let email = user.email;
-
-
         return (
             <Profile user={user}/>
         );

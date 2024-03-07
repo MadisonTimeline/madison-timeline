@@ -13,7 +13,7 @@ export async function POST(request: Request) {
         console.log(receivedData);
 
         // Validate required fields
-        const requiredFields = ['id', 'email', 'given_name', 'family_name', 'picture'];
+        const requiredFields = ['id', 'username', 'email', 'given_name', 'family_name', 'picture'];
         for (const field of requiredFields) {
             if (!receivedData[field]) {
                 throw new Error(`Missing required field: ${field}`);
@@ -27,6 +27,7 @@ export async function POST(request: Request) {
             .upsert({
                 id: receivedData.id,
                 email: receivedData.email,
+                username: receivedData.username,
                 given_name: receivedData.given_name,
                 family_name: receivedData.family_name,
                 picture: receivedData.picture,
@@ -39,7 +40,7 @@ export async function POST(request: Request) {
             console.error(error);
             throw new Error("Error inserting user data");
         }
-
+          
         // Return success response to client
         return new Response(
             JSON.stringify({
