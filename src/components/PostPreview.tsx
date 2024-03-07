@@ -38,7 +38,6 @@ export default function PostPreview({ post }: { post: Post }) {
                 <Link href={`/post/${post.id}`}>
                     <CardTitle>{post.title}</CardTitle>
                 </Link>
-                <CardDescription>{post.author}</CardDescription>
                 <CardDescription>{post.date.toLocaleString()}</CardDescription>
             </CardHeader>
             <CardContent>
