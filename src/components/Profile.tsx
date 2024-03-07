@@ -35,7 +35,7 @@ export default function Profile({ user }: { user: any }) {
             setUsername(usernameData);
         }
 
-    }, [ user]);
+    }, [ ]);
 
     const handleSaveProfile = async (e: React.FormEvent) => {
         e.preventDefault();
