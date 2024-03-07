@@ -7,12 +7,14 @@ import Profile from "@/components/Profile";
 
 export default function NewProfilePage() {
     const { user, isLoading, isAuthenticated } = useKindeBrowserClient();
+    
+    
 
     if (isLoading) return <div>Loading...</div>;
 
     if (isAuthenticated && user) {
         return (
-            <Profile user={user}/>
+            <Profile user={user} />
         );
     }
 }

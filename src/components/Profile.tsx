@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,11 +11,31 @@ export default function Profile({ user }: { user: any }) {
     //if user exists, populate the form with the user data
     //if user does not exist, create a new user with the data from the auth provider
 
-    const [username, setUsername] = useState("");
     const [familyName, setFamilyName] = useState(user.family_name);
     const [givenName, setGivenName] = useState(user.given_name);
     const [picture, setPicture] = useState(user.picture);
     const [email, setEmail] = useState(user.email);
+    const [username, setUsername] = useState("loading...");
+
+    useEffect(() => {
+        let userID = {
+            id: user.id
+        }
+        const response = await fetch("/api/createUser", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userID),
+        });
+        
+        if (response.ok) {
+            const createUserNameResponse = await response.json();
+            let usernameData = createUserNameResponse.username;
+            setUsername(usernameData);
+        }
+
+    }, [ user]);
 
     const handleSaveProfile = async (e: React.FormEvent) => {
         e.preventDefault();
