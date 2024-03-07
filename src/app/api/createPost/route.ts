@@ -23,7 +23,7 @@ export async function POST(request: Request) {
                 id: receivedData.id,
                 title: receivedData.title,
                 date: receivedData.date,
-                board_name: receivedData.board,
+                board_name: receivedData.board_name,
                 body: receivedData.body,
                 likes: receivedData.likes,
                 dislikes: receivedData.dislikes,
