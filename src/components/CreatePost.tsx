@@ -33,7 +33,7 @@ export default function CreatePost({
             likes: 0,
             dislikes: 0,
             views: 0,
-            author: user.given_name,
+            authorId: user.id
         };
         console.log(newPost);
 
