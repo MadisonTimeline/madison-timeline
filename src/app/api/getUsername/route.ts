@@ -1,24 +1,26 @@
 import { createClient } from "@/utils/supabase/client";
-
 export async function GET(request: Request) {
     try {
-        const receivedUserID = await request.json();
-
+        const receivedUserID = request.url.split('/').pop(); // Extracting user ID from URL
         const supabase = createClient();
-        const { data } = await supabase
+        const { data, error } = await supabase
             .from("users")
             .select("username")
-            .eq("id", receivedUserID.id);
+            .eq("id", receivedUserID);
 
-        if (!data) {
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        if (!data || data.length === 0) {
             return new Response(
-                JSON.stringify({ username : " Set Username "}),
+                JSON.stringify({ username: "Set Username" }),
                 {
                     headers: { "Content-Type": "application/json" },
                     status: 200
                 }
             );
-        }else {
+        } else {
             return new Response(
                 JSON.stringify({ username: data[0].username }),
                 {
@@ -30,13 +32,11 @@ export async function GET(request: Request) {
 
     } catch (error) {
         return new Response(
-            JSON.stringify({ message: "Error processing request"}),
+            JSON.stringify({ message: error.message }),
             {
                 headers: { "Content-Type": "application/json" },
-                status: 400
+                status: 500
             }
         );
     }
-
-
 }
