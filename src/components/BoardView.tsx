@@ -11,6 +11,8 @@ import { createClient } from "@/utils/supabase/client";
 const supabase = createClient();
 
 async function fetchPosts(boardname: string): Promise<Post[]> {
+    if (boardname === "Main") return (await supabase.from("posts").select()).data as Post[];
+    
     const { data, error } = await supabase.from("posts").select().eq("board_name", boardname);
 
     if (error) {
@@ -35,10 +37,7 @@ function BoardView({ boardname }: { boardname: string }) {
     return (
         <div className=" flex flex-col justify-center align-center m-10">
             <div className="h-[77vh] overflow-auto">
-
-                { posts && posts.map((post) => (
-                    <PostPreview key={post.id} post={post} />
-                ))}
+                {posts && posts.map((post) => <PostPreview key={post.id} post={post} />)}
             </div>
 
             <div className="absolute right-5 bottom-0">
