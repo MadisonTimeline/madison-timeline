@@ -28,14 +28,12 @@ export default function CreatePost({
             id: uuidv4(),
             title: postTitle,
             date: new Date(),
-            board: boardname,
+            board_name: boardname,
             body: postBody,
             likes: 0,
             dislikes: 0,
             views: 0,
             author: user.given_name,
-            authorId: user.id,
-            comments: [],
         };
         console.log(newPost);
 
