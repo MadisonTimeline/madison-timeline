@@ -80,15 +80,15 @@ export default function Profile({ user }: { user: any }) {
                     </div>
                     <div>
                         <Label>Family Name</Label>
-                        <Input value={familyName} onChange={(e) => setFamilyName(e.target.value)} />
+                        <Input value={familyName} disabled onChange={(e) => setFamilyName(e.target.value)} />
                     </div>
                     <div>
                         <Label>Given Name</Label>
-                        <Input value={givenName} onChange={(e) => setGivenName(e.target.value)} />
+                        <Input value={givenName} disabled onChange={(e) => setGivenName(e.target.value)} />
                     </div>
                     <div>
                         <Label>Email</Label>
-                        <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <Input value={email} disabled onChange={(e) => setEmail(e.target.value)} />
                     </div>
                 </form>
             </div>
