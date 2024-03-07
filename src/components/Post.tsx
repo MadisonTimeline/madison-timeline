@@ -6,7 +6,17 @@ import { useEffect, useState } from 'react'
 
 export default function Post({ postid }: { postid: string }) {
     // fetch the post from the server
-    const [post, setPost] = useState<Post>({ title: "Loading...", body: "Loading..." });
+    const [post, setPost] = useState<Post>({
+        id: "",
+        title: "",
+        date: new Date(),
+        board_name: "",
+        body: "",
+        likes: 0,
+        dislikes: 0,
+        views: 0,
+        authorId: "",
+    });
 
 
 
