@@ -5,7 +5,7 @@ import Post from '@/components/Post'
 // id should be the [id] from the url
 
 export default function PostPage() {
-    const {id}= useParams() as {idd: string};
+    const {id}= useParams();
     return (
         <Post postid={idd} />
     )
