@@ -17,7 +17,7 @@ export default function Profile({ user }: { user: any }) {
     const [email, setEmail] = useState(user.email);
     const [username, setUsername] = useState("loading...");
 
-    useEffect(() => {
+    useEffect( async () => {
         let userID = {
             id: user.id
         }
