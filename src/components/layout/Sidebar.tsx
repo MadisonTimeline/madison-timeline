@@ -83,21 +83,23 @@ export default function Sidebar({ show, setter }: { show: boolean, setter: React
                     />
                     <div className='flex flex-row p-5 justify-between'>
                         {
-                            !user ? (
-                                <>
-                                    <Button>
-                                        <LoginLink>Sign in</LoginLink>
-                                    </Button>
-                                    <Button>
-                                        <RegisterLink postLoginRedirectURL="/profile">Sign up</RegisterLink>
-                                    </Button>
-
-
-                                </>
+                            isLoading ? (
+                                <div>Loading...</div>
                             ) : (
-                                <Button>
-                                    <LogoutLink>Log out</LogoutLink>
-                                </Button>
+                                !user ? (
+                                    <>
+                                        <Button>
+                                            <LoginLink>Sign in</LoginLink>
+                                        </Button>
+                                        <Button>
+                                            <RegisterLink postLoginRedirectURL="/profile">Sign up</RegisterLink>
+                                        </Button>
+                                    </>
+                                ) : (
+                                    <Button>
+                                        <LogoutLink>Log out</LogoutLink>
+                                    </Button>
+                                )
                             )
                         }
                     </div>

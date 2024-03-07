@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 
 import { User } from "@/types/User";
 
-export default function Profile({ user }: { user: any }) {
+export default function Profile( { user }: { user: any }) {
 
     // TODO: check if user already exists in the database
     //if user exists, populate the form with the user data

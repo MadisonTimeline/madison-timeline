@@ -24,7 +24,7 @@ export async function POST(request: Request) {
         const supabase = createClient();
         const { data, error } = await supabase
             .from("users")
-            .insert({
+            .upsert({
                 id: receivedData.id,
                 email: receivedData.email,
                 given_name: receivedData.given_name,
