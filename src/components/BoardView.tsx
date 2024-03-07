@@ -11,15 +11,32 @@ import { createClient } from "@/utils/supabase/client";
 const supabase = createClient();
 
 async function fetchPosts(boardname: string): Promise<Post[]> {
-    if (boardname === "Main") return (await supabase.from("posts").select()).data as Post[];
-    
-    const { data, error } = await supabase.from("posts").select().eq("board_name", boardname);
+    let response;
+    if (boardname === "Main") {
+        response = await supabase.from("posts").select().order("date", { ascending: false });
+    } else {
+        response = await supabase
+            .from("posts")
+            .select()
+            .eq("board_name", boardname)
+            .order("date", { ascending: false });
+    }
+
+    const { data, error } = response;
 
     if (error) {
         console.log("Error fetching posts:");
         console.error(error);
+        return [];
     }
-    return data as Post[];
+
+    // Convert date strings to JavaScript Date objects
+    const fetchedPosts = data.map((post: { date: string | number | Date }) => ({
+        ...post,
+        date: new Date(post.date),
+    }));
+
+    return fetchedPosts as Post[];
 }
 
 function BoardView({ boardname }: { boardname: string }) {
