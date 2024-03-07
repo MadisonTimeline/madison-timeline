@@ -5,7 +5,7 @@ export async function GET(request: Request) {
         const supabase = createClient();
         const { data, error } = await supabase
             .from("posts")
-            .select("title", "date", "body", "likes", "dislikes", "views", "board_name")
+            .select("*")
             .eq("id", receivedPostID);
 
         if (error) {
