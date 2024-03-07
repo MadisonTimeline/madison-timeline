@@ -53,7 +53,7 @@ function BoardView({ boardname }: { boardname: string }) {
     if (isLoading) return <div>Loading...</div>;
     return (
         <div className=" flex flex-col justify-center align-center m-10">
-            <div className="h-[77vh] overflow-auto">
+            <div className="h-[77vh] overflow-auto gap-3">
                 {posts && posts.map((post) => <PostPreview key={post.id} post={post} />)}
             </div>
 
