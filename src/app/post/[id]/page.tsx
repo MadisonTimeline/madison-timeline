@@ -9,6 +9,6 @@ export default function PostPage() {
     console.log(id);
     let postid = (id as string);
     return (
-        <Post postid={id} />
+        <Post postid={postid} />
     )
 }
