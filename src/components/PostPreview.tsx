@@ -58,35 +58,35 @@ export default function PostPreview({ post, user }: { post: Post, user: KindeUse
             if (liked) {
                 setLiked(false);
                 likeChange = -1;
-                likedPosts =likedPosts.filter((postId) => postId !== post.id);
+                setLikedPosts(likedPosts.filter((postId) => postId !== post.id));
 
             } else {
                 setLiked(true);
                 likeChange = 1;
                 if (!likedPosts.includes(post.id)) {
-                    likedPosts.push(post.id);
+                    setLikedPosts([...likedPosts, post.id]);
                 }
                 if (disliked) {
                     setDisliked(false);
                     dislikeChange = -1;
-                    dislikedPosts = dislikedPosts.filter((postId) => postId !== post.id);
+                    setDislikedPosts(dislikedPosts.filter((postId) => postId !== post.id));
                 }
             }
         } else {
             if (disliked) {
                 setDisliked(false);
                 dislikeChange = -1;
-                dislikedPosts = dislikedPosts.filter((postId) => postId !== post.id);
+                setDislikedPosts(dislikedPosts.filter((postId) => postId !== post.id));
             } else {
                 setDisliked(true);
                 dislikeChange = 1;
                 if (!dislikedPosts.includes(post.id)) {
-                    dislikedPosts.push(post.id);
+                    setDislikedPosts([...dislikedPosts, post.id]);
                 }
                 if (liked) {
                     setLiked(false);
                     likeChange = -1;
-                    likedPosts = likedPosts.filter((postId) => postId !== post.id);
+                    setLikedPosts(likedPosts.filter((postId) => postId !== post.id));
                 }
             }
         }
