@@ -25,8 +25,8 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
     const [disliked, setDisliked] = useState(user.disliked_posts.includes(post.id));
 
     function handleLike(updateLike: boolean) {
-        let likeChange: integer = 0;
-        let dislikeChange: integer = 0;
+        let likeChange = 0;
+        let dislikeChange = 0;
         if (updateLike) {
             if (liked) {
                 setLiked(false);
