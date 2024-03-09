@@ -17,19 +17,56 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import { Post } from "@/types/Post"
+import { User } from "@/types/User"
 import Link from "next/link"
 
+export default function PostPreview({ post, user }: { post: Post, user: User }) {
+    const [liked, setLiked] = useState(user.liked_posts.includes(post.id));
+    const [disliked, setDisliked] = useState(user.disliked_posts.includes(post.id));
 
+    function handleLike(updateLike: boolean) {
+        if (updateLike) {
+            if (liked) {
+                setLiked(false);
+                user.liked_posts = user.liked_posts.filter((postId) => postId !== post.id);
+            } else {
+                setLiked(true);
+                setDisliked(false);
+                if (!user.liked_posts.includes(post.id)) {
+                    user.liked_posts.push(post.id);
+                }
+                user.disliked_posts = user.disliked_posts.filter((postId) => postId !== post.id);
+            }
+        } else {
+            if (disliked) {
+                setDisliked(false);
+                user.disliked_posts = user.disliked_posts.filter((postId) => postId !== post.id);
+            } else {
+                setDisliked(true);
+                setLiked(false);
+                if (!user.disliked_posts.includes(post.id)) {
+                    user.disliked_posts.push(post.id);
+                }
+                user.liked_posts = user.liked_posts.filter((postId) => postId !== post.id);
+            }
+        }
 
-export default function PostPreview({ post }: { post: Post }) {
-    const [liked, setLiked] = useState(false);
-    const [disliked, setDisliked] = useState(false);
-
-    function handleLike() {
+        const userLikeTuple = {
+            userId: user.id,
+            postId: post.id,
+            like: liked,
+            dislike: disliked,
+            liked_posts: user.liked_posts,
+            disliked_posts: user.disliked_posts
+        }
+        fetch("/api/updateLike", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userLikeTuple),
+        });
         setLiked(!liked);
-    }
-    function handleDislike() {
-        setDisliked(!disliked);
     }
 
     return (
@@ -45,13 +82,13 @@ export default function PostPreview({ post }: { post: Post }) {
             </CardContent>
             <CardFooter className='flex items-center gap-2'>
 
-                <Button className="flex items-center gap-2" onClick={handleLike}>
+                <Button className="flex items-center gap-2" onClick={handleLike(true)}>
                     {
                         liked ? <ThumbUpAltIcon /> : <ThumbUpOffAltIcon />
                     }
                     Like
                 </Button>
-                <Button className="flex items-center gap-2" onClick={handleDislike}>
+                <Button className="flex items-center gap-2" onClick={handleLike(false)}>
                     {
                         disliked ? <ThumbDownAltIcon /> : <ThumbDownOffAltIcon />
                     }
