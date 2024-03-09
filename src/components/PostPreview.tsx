@@ -22,10 +22,11 @@ import Link from "next/link"
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 
 export default function PostPreview({ post, user }: { post: Post, user: KindeUser }) {
-    const [liked, setLiked] = useState(user.liked_posts.includes(post.id));
-    const [disliked, setDisliked] = useState(user.disliked_posts.includes(post.id));
+
     const [likedPosts, setLikedPosts] = useState<string[]>([]);
     const [dislikedPosts, setDislikedPosts] = useState<string[]>([]);
+    const [liked, setLiked] = useState(likedPosts.includes(post.id));
+    const [disliked, setDisliked] = useState(dislikedPosts.includes(post.id));
 
     useEffect(() => {
         async function fetchLikedAndDisLikedPosts() {
@@ -50,6 +51,8 @@ export default function PostPreview({ post, user }: { post: Post, user: KindeUse
         }
         fetchLikedAndDisLikedPosts();
     }, [user.id]);
+
+
 
     function handleLike(updateLike: boolean) {
         let likeChange = 0;
