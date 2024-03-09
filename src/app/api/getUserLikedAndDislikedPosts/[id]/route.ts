@@ -12,9 +12,10 @@ export async function GET(request: Request) {
             throw new Error(error.message);
         }
 
+
         if (!data || data.length === 0) {
             return new Response(
-                JSON.stringify({ username: "Set Username" }),
+                JSON.stringify({ liked_posts: [], disliked_posts: [] }),
                 {
                     headers: { "Content-Type": "application/json" },
                     status: 200
@@ -22,7 +23,7 @@ export async function GET(request: Request) {
             );
         } else {
             return new Response(
-                JSON.stringify({ username: data[0].username }),
+                JSON.stringify({ liked_posts: data[0].liked_posts, disliked_posts: data[0].disliked_posts }),
                 {
                     headers: { "Content-Type": "application/json" },
                     status: 200
