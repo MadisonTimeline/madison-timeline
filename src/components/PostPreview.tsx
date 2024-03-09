@@ -25,37 +25,50 @@ export default function PostPreview({ post, user }: { post: Post, user: User }) 
     const [disliked, setDisliked] = useState(user.disliked_posts.includes(post.id));
 
     function handleLike(updateLike: boolean) {
+        let likeChange: integer = 0;
+        let dislikeChange: integer = 0;
         if (updateLike) {
             if (liked) {
                 setLiked(false);
+                likeChange = -1;
                 user.liked_posts = user.liked_posts.filter((postId) => postId !== post.id);
+
             } else {
                 setLiked(true);
-                setDisliked(false);
+                likeChange = 1;
                 if (!user.liked_posts.includes(post.id)) {
                     user.liked_posts.push(post.id);
                 }
-                user.disliked_posts = user.disliked_posts.filter((postId) => postId !== post.id);
+                if (disliked) {
+                    setDisliked(false);
+                    dislikeChange = -1;
+                    user.disliked_posts = user.disliked_posts.filter((postId) => postId !== post.id);
+                }
             }
         } else {
             if (disliked) {
                 setDisliked(false);
+                dislikeChange = -1;
                 user.disliked_posts = user.disliked_posts.filter((postId) => postId !== post.id);
             } else {
                 setDisliked(true);
-                setLiked(false);
+                dislikeChange = 1;
                 if (!user.disliked_posts.includes(post.id)) {
                     user.disliked_posts.push(post.id);
                 }
-                user.liked_posts = user.liked_posts.filter((postId) => postId !== post.id);
+                if (liked) {
+                    setLiked(false);
+                    likeChange = -1;
+                    user.liked_posts = user.liked_posts.filter((postId) => postId !== post.id);
+                }
             }
         }
 
         const userLikeTuple = {
             userId: user.id,
             postId: post.id,
-            like: liked,
-            dislike: disliked,
+            likeChange: likeChange,
+            dislikeChange: dislikeChange,
             liked_posts: user.liked_posts,
             disliked_posts: user.disliked_posts
         }
