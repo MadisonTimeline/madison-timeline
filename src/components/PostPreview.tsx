@@ -19,10 +19,37 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import { Post } from "@/types/Post"
 import { User } from "@/types/User"
 import Link from "next/link"
+import { KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 
-export default function PostPreview({ post, user }: { post: Post, user: any }) {
+export default function PostPreview({ post, user }: { post: Post, user: KindeUser }) {
     const [liked, setLiked] = useState(user.liked_posts.includes(post.id));
     const [disliked, setDisliked] = useState(user.disliked_posts.includes(post.id));
+    const [likedPosts, setLikedPosts] = useState<string[]>([]);
+    const [dislikedPosts, setDislikedPosts] = useState<string[]>([]);
+
+    useEffect(() => {
+        async function fetchLikedAndDisLikedPosts() {
+            try {
+                const response = await fetch(`/api/getUserLikedAndDislikedPosts/${user.id}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    setLikedPosts(data.liked_posts);
+                    setDislikedPosts(data.disliked_posts);
+                } else {
+                    console.error("Error fetching username:", response.statusText);
+                }
+            } catch (error) {
+                console.error("Error fetching username:", error);
+            }
+        }
+        fetchLikedAndDisLikedPosts();
+    }, [user.id]);
 
     function handleLike(updateLike: boolean) {
         let likeChange = 0;
@@ -31,35 +58,35 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
             if (liked) {
                 setLiked(false);
                 likeChange = -1;
-                user.liked_posts = user.liked_posts.filter((postId) => postId !== post.id);
+                likedPosts =likedPosts.filter((postId) => postId !== post.id);
 
             } else {
                 setLiked(true);
                 likeChange = 1;
-                if (!user.liked_posts.includes(post.id)) {
-                    user.liked_posts.push(post.id);
+                if (!likedPosts.includes(post.id)) {
+                    likedPosts.push(post.id);
                 }
                 if (disliked) {
                     setDisliked(false);
                     dislikeChange = -1;
-                    user.disliked_posts = user.disliked_posts.filter((postId) => postId !== post.id);
+                    dislikedPosts = dislikedPosts.filter((postId) => postId !== post.id);
                 }
             }
         } else {
             if (disliked) {
                 setDisliked(false);
                 dislikeChange = -1;
-                user.disliked_posts = user.disliked_posts.filter((postId) => postId !== post.id);
+                dislikedPosts = dislikedPosts.filter((postId) => postId !== post.id);
             } else {
                 setDisliked(true);
                 dislikeChange = 1;
-                if (!user.disliked_posts.includes(post.id)) {
-                    user.disliked_posts.push(post.id);
+                if (!dislikedPosts.includes(post.id)) {
+                    dislikedPosts.push(post.id);
                 }
                 if (liked) {
                     setLiked(false);
                     likeChange = -1;
-                    user.liked_posts = user.liked_posts.filter((postId) => postId !== post.id);
+                    likedPosts = likedPosts.filter((postId) => postId !== post.id);
                 }
             }
         }
@@ -69,8 +96,8 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
             postId: post.id,
             likeChange: likeChange,
             dislikeChange: dislikeChange,
-            liked_posts: user.liked_posts,
-            disliked_posts: user.disliked_posts
+            liked_posts: likedPosts,
+            disliked_posts: dislikedPosts
         }
         fetch("/api/updateLike", {
             method: "POST",
