@@ -19,9 +19,8 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import { Post } from "@/types/Post"
 import { User } from "@/types/User"
 import Link from "next/link"
-import { KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 
-export default function PostPreview({ post, user }: { post: Post, user: KindeUser }) {
+export default function PostPreview({ post, user }: { post: Post, user: any }) {
 
     const [likedPosts, setLikedPosts] = useState<string[]>([]);
     const [dislikedPosts, setDislikedPosts] = useState<string[]>([]);
