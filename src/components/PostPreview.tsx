@@ -20,7 +20,7 @@ import { Post } from "@/types/Post"
 import { User } from "@/types/User"
 import Link from "next/link"
 
-export default function PostPreview({ post, user }: { post: Post, user: any }) {
+export default function PostPreview({ post, user }: { post: Post; user: any; }) {
 
     const [likedPosts, setLikedPosts] = useState<string[]>([]);
     const [dislikedPosts, setDislikedPosts] = useState<string[]>([]);
