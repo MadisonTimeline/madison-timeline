@@ -20,29 +20,32 @@ export async function PUT(request: Request) {
         }
 
         // users
-        const { userError } = await supabase
+        const { error } = await supabase
             .from("users")
             .update({
                 liked_posts: receivedData.liked_posts,
                 disliked_posts: receivedData.disliked_posts
             })
             .eq("id", receivedData.userId)
-        if (userError) {
+        if (error) {
             console.error("Error inserting data:");
-            console.error(userError);
+            console.error(error);
         }
 
-        // posts
-        const { postError } = await supabase
-            .from("posts")
-            .rpc('update_post_like_dislike', {
-                dislikes_change: receivedData.dislikeChange,
-                likes_change: receivedData.likeChange, 
-                post_id: receivedData.postId
-            })
-        if (postError) {
-            console.error("Error inserting data:");
-            console.error(postError);
+        {
+            // posts
+            const { error } = await supabase
+                .from("posts")
+                .rpc('update_post_like_dislike', {
+                    dislikes_change: receivedData.dislikeChange,
+                    likes_change: receivedData.likeChange, 
+                    post_id: receivedData.postId
+                })
+            if (error) {
+                console.error("Error inserting data:");
+                console.error(error);
+            }
+
         }
 
     } catch (error) {
