@@ -90,7 +90,6 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
             },
             body: JSON.stringify(userLikeTuple),
         });
-        setLiked(!liked);
     }
 
 
@@ -131,7 +130,6 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
             },
             body: JSON.stringify(userLikeTuple),
         });
-        setLiked(!liked);
     }
 
     return (
