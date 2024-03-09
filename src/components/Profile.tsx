@@ -46,7 +46,9 @@ export default function Profile({ user }: { user: any }) {
             family_name: familyName,
             given_name: givenName,
             picture: picture,
-            email: email
+            email: email,
+            liked_posts: [],
+            disliked_posts: [],
         };
         const response = await fetch("/api/createUser", {
             method: "POST",
