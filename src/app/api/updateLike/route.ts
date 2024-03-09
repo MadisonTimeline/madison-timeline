@@ -35,7 +35,6 @@ export async function PUT(request: Request) {
         {
             // posts
             const { error } = await supabase
-                .from("posts")
                 .rpc('update_post_like_dislike', {
                     dislikes_change: receivedData.dislikeChange,
                     likes_change: receivedData.likeChange, 
