@@ -36,7 +36,7 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
                         "Content-Type": "application/json",
                     },
                 });
-    
+
                 if (response.ok) {
                     const data = await response.json();
                     setLikedPosts(data.liked_posts);
@@ -53,45 +53,68 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
 
 
 
-    function handleLike(updateLike: boolean) {
+    function handleLike() {
         let likeChange = 0;
         let dislikeChange = 0;
-        if (updateLike) {
-            if (liked) {
-                setLiked(false);
-                likeChange = -1;
-                setLikedPosts(likedPosts.filter((postId) => postId !== post.id));
 
-            } else {
-                setLiked(true);
-                likeChange = 1;
-                if (!likedPosts.includes(post.id)) {
-                    setLikedPosts([...likedPosts, post.id]);
-                }
-                if (disliked) {
-                    setDisliked(false);
-                    dislikeChange = -1;
-                    setDislikedPosts(dislikedPosts.filter((postId) => postId !== post.id));
-                }
-            }
+        if (liked) {
+            setLiked(false);
+            likeChange = -1;
+            setLikedPosts(likedPosts.filter((postId) => postId !== post.id));
+
         } else {
+            setLiked(true);
+            likeChange = 1;
+            if (!likedPosts.includes(post.id)) {
+                setLikedPosts([...likedPosts, post.id]);
+            }
             if (disliked) {
                 setDisliked(false);
                 dislikeChange = -1;
                 setDislikedPosts(dislikedPosts.filter((postId) => postId !== post.id));
-            } else {
-                setDisliked(true);
-                dislikeChange = 1;
-                if (!dislikedPosts.includes(post.id)) {
-                    setDislikedPosts([...dislikedPosts, post.id]);
-                }
-                if (liked) {
-                    setLiked(false);
-                    likeChange = -1;
-                    setLikedPosts(likedPosts.filter((postId) => postId !== post.id));
-                }
             }
         }
+
+        const userLikeTuple = {
+            userId: user.id,
+            postId: post.id,
+            likeChange: likeChange,
+            dislikeChange: dislikeChange,
+            liked_posts: likedPosts,
+            disliked_posts: dislikedPosts
+        }
+        fetch("/api/updateLike", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userLikeTuple),
+        });
+        setLiked(!liked);
+    }
+
+
+    function handleDislike() {
+        let likeChange = 0;
+        let dislikeChange = 0;
+
+        if (disliked) {
+            setDisliked(false);
+            dislikeChange = -1;
+            setDislikedPosts(dislikedPosts.filter((postId) => postId !== post.id));
+        } else {
+            setDisliked(true);
+            dislikeChange = 1;
+            if (!dislikedPosts.includes(post.id)) {
+                setDislikedPosts([...dislikedPosts, post.id]);
+            }
+            if (liked) {
+                setLiked(false);
+                likeChange = -1;
+                setLikedPosts(likedPosts.filter((postId) => postId !== post.id));
+            }
+        }
+
 
         const userLikeTuple = {
             userId: user.id,
@@ -124,13 +147,13 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
             </CardContent>
             <CardFooter className='flex items-center gap-2'>
 
-                <Button className="flex items-center gap-2" onClick={handleLike(true)}>
+                <Button className="flex items-center gap-2" onClick={handleLike}>
                     {
                         liked ? <ThumbUpAltIcon /> : <ThumbUpOffAltIcon />
                     }
                     Like
                 </Button>
-                <Button className="flex items-center gap-2" onClick={handleLike(false)}>
+                <Button className="flex items-center gap-2" onClick={handleDislike}>
                     {
                         disliked ? <ThumbDownAltIcon /> : <ThumbDownOffAltIcon />
                     }
