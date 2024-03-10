@@ -98,14 +98,14 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
                     }
                     Like
                 </Button>
-                <Label> {liked_users.length} likes</Label>
+                <Label> {liked_users.length} LIKES</Label>
                 <Button className="flex items-center gap-2" onClick={handleDislike}>
                     {
                         disliked ? <ThumbDownAltIcon /> : <ThumbDownOffAltIcon />
                     }
                     Dislike
                 </Button>
-                <Label> {disliked_users.length} dislikes</Label>
+                <Label> {disliked_users.length} DISLIKES</Label>
             </CardFooter>
         </Card>
     )
