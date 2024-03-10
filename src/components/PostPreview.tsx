@@ -18,7 +18,6 @@ import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import { Post } from "@/types/Post"
 import Link from "next/link"
-import { request } from "http";
 
 
 

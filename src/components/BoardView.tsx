@@ -6,6 +6,7 @@ import CreatePost from "./CreatePost";
 import { Button } from "./ui/button";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import PostPreview from "./PostPreview";
+import GuestPostPreview from "./GuestPostPreview";
 import { createClient } from "@/utils/supabase/client";
 
 const supabase = createClient();
@@ -54,7 +55,16 @@ function BoardView({ boardname }: { boardname: string }) {
     return (
         <div className=" flex flex-col justify-center align-center m-10">
             <div className="h-[77vh] overflow-auto gap-3">
-                {posts && posts.map((post) => <PostPreview key={post.id} post={post} user={user} />)}
+                {
+                    user ? (
+                        posts && posts.map((post) => <PostPreview key={post.id} post={post} user={user} />)
+                    ) : (
+                        posts && posts.map((post) => <GuestPostPreview key={post.id} post={post} />)
+                    )
+
+                }
+
+
 
             </div>
 
