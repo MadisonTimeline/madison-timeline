@@ -31,7 +31,7 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
     useEffect(() => {
         setLiked(liked_users && liked_users.includes(user.id));
         setDisliked(disliked_users && disliked_users.includes(user.id) );
-    }, [liked_users, disliked_users])
+    }, [liked_users, disliked_users, user.id])
 
     useEffect( () => {
         async function updateLikes() {
@@ -51,7 +51,7 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
             });
         }
         updateLikes();
-    }, [liked_users, disliked_users])
+    }, [liked_users, disliked_users, post.id])
 
 
     async function handleLike() {
