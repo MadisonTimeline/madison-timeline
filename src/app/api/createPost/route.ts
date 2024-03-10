@@ -29,6 +29,8 @@ export async function POST(request: Request) {
                 dislikes: receivedData.dislikes,
                 views: receivedData.views,
                 author_id: receivedData.authorId,
+                liked_users: receivedData.liked_users,
+                disliked_users: receivedData.disliked_users,
             })
             .select();
         if (error) {
