@@ -31,6 +31,8 @@ export async function POST(request: Request) {
                 given_name: receivedData.given_name,
                 family_name: receivedData.family_name,
                 picture: receivedData.picture,
+                liked_posts: [],
+                disliked_posts: []
             })
             .select();
 
