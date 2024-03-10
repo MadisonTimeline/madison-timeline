@@ -11,11 +11,13 @@ export default function CreatePost({
     setPosts,
     boardname,
     user,
+    setter,
 }: {
     posts: Post[];
     setPosts: (posts: Post[]) => void;
     boardname: string;
     user: any;
+    setter: any;
 }) {
     const [postTitle, setPostTitle] = useState("");
     const [postBody, setPostBody] = useState("");
@@ -36,7 +38,6 @@ export default function CreatePost({
             liked_users: [],
             disliked_users: [],
         };
-        console.log(newPost);
 
         const response = await fetch("/api/createPost", {
             method: "POST",
@@ -66,6 +67,7 @@ export default function CreatePost({
 
         setPostTitle("");
         setPostBody("");
+        setter(false); // Close the modal
     };
 
     return (

@@ -42,21 +42,22 @@ async function fetchPosts(boardname: string): Promise<Post[]> {
 
 function BoardView({ boardname }: { boardname: string }) {
     const [posts, setPosts] = useState<Post[]>([]);
-
+    const [numPosts, setNumPosts] = useState(0);
     const [createPostModal, setCreatePostModal] = useState(false);
     const { isLoading, user } = useKindeBrowserClient();
 
     // Use effect to fetch posts on mount
     useEffect(() => {
         fetchPosts(boardname).then(setPosts);
-    }, [boardname]);
+        setNumPosts( posts.length );
+    }, [boardname, numPosts]);
 
     if (isLoading) return <div>Loading...</div>;
     return (
         <div className=" flex flex-col justify-center align-center m-10">
             <div className="h-[77vh] overflow-auto gap-3">
                 {user
-                    ? posts && posts.map((post) => <PostPreview key={post.id} post={post} user={user} />)
+                    ? posts && posts.map((post) => <PostPreview key={post.id} post={post} user={user} setter={setNumPosts}/>)
                     : posts && posts.map((post) => <GuestPostPreview key={post.id} post={post} />)}
             </div>
 
@@ -72,7 +73,7 @@ function BoardView({ boardname }: { boardname: string }) {
                         <Button onClick={() => setCreatePostModal(false)} className="absolute right-3 top-3">
                             X
                         </Button>
-                        <CreatePost posts={posts} setPosts={setPosts} boardname={boardname} user={user} />
+                        <CreatePost posts={posts} setPosts={setPosts} boardname={boardname} user={user} setter={setCreatePostModal} />
                     </>
                 )}
             </div>
