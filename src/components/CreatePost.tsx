@@ -22,8 +22,7 @@ export default function CreatePost({
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        // In a real application, you'd also send this to your backend to store
+        
         const newPost: Post = {
             id: uuidv4(),
             title: postTitle,

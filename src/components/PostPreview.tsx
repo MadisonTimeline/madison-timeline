@@ -30,8 +30,8 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
     const [disliked_users, setDislikedUsers] = useState(post.disliked_users ? post.disliked_users : []);
 
     useEffect(() => {
-        setLiked(liked_users ? liked_users.includes(user.id) : [] );
-        setDisliked(disliked_users ? disliked_users.includes(user.id) : []);
+        setLiked(liked_users && liked_users.includes(user.id));
+        setDisliked(disliked_users && disliked_users.includes(user.id) );
     }, [liked_users, disliked_users])
 
     useEffect( () => {
