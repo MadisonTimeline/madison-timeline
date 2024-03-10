@@ -27,6 +27,8 @@ export async function POST(request: Request) {
             .update({
                 liked_users: receivedData.liked_users,
                 disliked_users: receivedData.disliked_users,
+                likes: receivedData.likes,
+                dislikes: receivedData.dislikes
             })
             .eq("id", receivedData.post_id)
 

@@ -32,7 +32,6 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
     useEffect(() => {
         setLiked(liked_users ? liked_users.includes(user.id) : [] );
         setDisliked(disliked_users ? disliked_users.includes(user.id) : []);
-
     }, [liked_users, disliked_users])
 
     useEffect( () => {
@@ -41,6 +40,8 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
                 post_id: post.id,
                 liked_users: liked_users,
                 disliked_users: disliked_users,
+                likes: liked_users.length,
+                dislikes: disliked_users.length,
             }
             await fetch("/api/likePost", {
                 method: "POST",
@@ -55,10 +56,8 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
 
 
     async function handleLike() {
-
         if (liked) {
             setLikedUsers(liked_users.filter((id) => id !== user.id));
-
         }
         else {
             if (disliked) {
@@ -99,12 +98,14 @@ export default function PostPreview({ post, user }: { post: Post, user: any }) {
                     }
                     Like
                 </Button>
+                <Label> {liked_users.length} likes</Label>
                 <Button className="flex items-center gap-2" onClick={handleDislike}>
                     {
                         disliked ? <ThumbDownAltIcon /> : <ThumbDownOffAltIcon />
                     }
                     Dislike
                 </Button>
+                <Label> {disliked_users.length} dislikes</Label>
             </CardFooter>
         </Card>
     )
