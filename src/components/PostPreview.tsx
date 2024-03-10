@@ -1,5 +1,5 @@
 "use client";
-import React from "react"
+import React, { use } from "react"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import {
@@ -17,119 +17,66 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import { Post } from "@/types/Post"
-import { User } from "@/types/User"
 import Link from "next/link"
+import { request } from "http";
 
-export default function PostPreview({ post, user }: { post: Post; user: any; }) {
 
-    const [likedPosts, setLikedPosts] = useState<string[]>([]);
-    const [dislikedPosts, setDislikedPosts] = useState<string[]>([]);
-    const [liked, setLiked] = useState(likedPosts.includes(post.id));
-    const [disliked, setDisliked] = useState(dislikedPosts.includes(post.id));
+
+export default function PostPreview({ post, user }: { post: Post, user: any }) {
+
+    const [liked, setLiked] = useState(post.liked_users && post.liked_users.includes(user.id));
+    const [disliked, setDisliked] = useState(post.disliked_users && post.disliked_users.includes(user.id));
+    const [liked_users, setLikedUsers] = useState(post.liked_users ? post.liked_users : []);
+    const [disliked_users, setDislikedUsers] = useState(post.disliked_users ? post.disliked_users : []);
 
     useEffect(() => {
-        async function fetchLikedAndDisLikedPosts() {
-            try {
-                const response = await fetch(`/api/getUserLikedAndDislikedPosts/${user.id}`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                });
+        setLiked(liked_users ? liked_users.includes(user.id) : [] );
+        setDisliked(disliked_users ? disliked_users.includes(user.id) : []);
+    }, [liked_users, disliked_users])
 
-                if (response.ok) {
-                    const data = await response.json();
-                    setLikedPosts(data.liked_posts);
-                    setDislikedPosts(data.disliked_posts);
-                } else {
-                    console.error("Error fetching username:", response.statusText);
-                }
-            } catch (error) {
-                console.error("Error fetching username:", error);
+    useEffect( () => {
+        async function updateLikes() {
+            const requestData = {
+                post_id: post.id,
+                liked_users: liked_users,
+                disliked_users: disliked_users,
+                likes: liked_users.length,
+                dislikes: disliked_users.length,
             }
+            await fetch("/api/likePost", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestData),
+            });
         }
-        fetchLikedAndDisLikedPosts();
-    }, [user.id]);
+        updateLikes();
+    }, [liked_users, disliked_users])
 
 
-
-    function handleLike() {
-        let likeChange = 0;
-        let dislikeChange = 0;
-
+    async function handleLike() {
         if (liked) {
-            setLiked(false);
-            likeChange = -1;
-            setLikedPosts(likedPosts.filter((postId) => postId !== post.id));
-
-        } else {
-            setLiked(true);
-            likeChange = 1;
-            if (!likedPosts.includes(post.id)) {
-                setLikedPosts([...likedPosts, post.id]);
-            }
+            setLikedUsers(liked_users.filter((id) => id !== user.id));
+        }
+        else {
             if (disliked) {
-                setDisliked(false);
-                dislikeChange = -1;
-                setDislikedPosts(dislikedPosts.filter((postId) => postId !== post.id));
+                setDislikedUsers(disliked_users.filter((id) => id !== user.id));
             }
+            setLikedUsers([...liked_users, user.id]);
         }
-
-        const userLikeTuple = {
-            userId: user.id,
-            postId: post.id,
-            likeChange: likeChange,
-            dislikeChange: dislikeChange,
-            liked_posts: likedPosts,
-            disliked_posts: dislikedPosts
-        }
-        fetch("/api/updateLike", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(userLikeTuple),
-        });
     }
 
-
-    function handleDislike() {
-        let likeChange = 0;
-        let dislikeChange = 0;
-
+    async function handleDislike() {
         if (disliked) {
-            setDisliked(false);
-            dislikeChange = -1;
-            setDislikedPosts(dislikedPosts.filter((postId) => postId !== post.id));
-        } else {
-            setDisliked(true);
-            dislikeChange = 1;
-            if (!dislikedPosts.includes(post.id)) {
-                setDislikedPosts([...dislikedPosts, post.id]);
-            }
+            setDislikedUsers(disliked_users.filter((id) => id !== user.id));
+        }
+        else {
             if (liked) {
-                setLiked(false);
-                likeChange = -1;
-                setLikedPosts(likedPosts.filter((postId) => postId !== post.id));
+                setLikedUsers(liked_users.filter((id) => id !== user.id));
             }
+            setDislikedUsers([...disliked_users, user.id]);
         }
-
-
-        const userLikeTuple = {
-            userId: user.id,
-            postId: post.id,
-            likeChange: likeChange,
-            dislikeChange: dislikeChange,
-            liked_posts: likedPosts,
-            disliked_posts: dislikedPosts
-        }
-        fetch("/api/updateLike", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(userLikeTuple),
-        });
     }
 
     return (
@@ -151,12 +98,14 @@ export default function PostPreview({ post, user }: { post: Post; user: any; }) 
                     }
                     Like
                 </Button>
+                <Label> {liked_users.length} likes</Label>
                 <Button className="flex items-center gap-2" onClick={handleDislike}>
                     {
                         disliked ? <ThumbDownAltIcon /> : <ThumbDownOffAltIcon />
                     }
                     Dislike
                 </Button>
+                <Label> {disliked_users.length} dislikes</Label>
             </CardFooter>
         </Card>
     )

@@ -20,6 +20,8 @@ export default function Post({ postid }: { postid: string }) {
         dislikes: 0,
         views: 0,
         authorId: "",
+        liked_users: [],
+        disliked_users: [],
     });
 
 
