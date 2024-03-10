@@ -54,7 +54,7 @@ function BoardView({ boardname }: { boardname: string }) {
     return (
         <div className=" flex flex-col justify-center align-center m-10">
             <div className="h-[77vh] overflow-auto gap-3">
-                {posts && posts.map((post) => <PostPreview key={post.id} post={post} />)}
+                {posts && posts.map((post) => <PostPreview key={post.id} post={post} user={user} />)}
             </div>
 
             <div className="absolute right-5 bottom-0">

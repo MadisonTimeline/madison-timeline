@@ -1,6 +1,6 @@
 "use client";
-import React from "react"
-import { useState } from "react"
+import React, { use } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -18,18 +18,66 @@ import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import { Post } from "@/types/Post"
 import Link from "next/link"
+import { request } from "http";
 
 
 
-export default function PostPreview({ post }: { post: Post }) {
-    const [liked, setLiked] = useState(false);
-    const [disliked, setDisliked] = useState(false);
+export default function PostPreview({ post, user }: { post: Post, user: any }) {
 
-    function handleLike() {
-        setLiked(!liked);
+    const [liked, setLiked] = useState(post.liked_users && post.liked_users.includes(user.id));
+    const [disliked, setDisliked] = useState(post.disliked_users && post.disliked_users.includes(user.id));
+    const [liked_users, setLikedUsers] = useState(post.liked_users ? post.liked_users : []);
+    const [disliked_users, setDislikedUsers] = useState(post.disliked_users ? post.disliked_users : []);
+
+    useEffect(() => {
+        setLiked(liked_users ? liked_users.includes(user.id) : [] );
+        setDisliked(disliked_users ? disliked_users.includes(user.id) : []);
+
+    }, [liked_users, disliked_users])
+
+    useEffect( () => {
+        async function updateLikes() {
+            const requestData = {
+                post_id: post.id,
+                liked_users: liked_users,
+                disliked_users: disliked_users,
+            }
+            await fetch("/api/likePost", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestData),
+            });
+        }
+        updateLikes();
+    }, [liked_users, disliked_users])
+
+
+    async function handleLike() {
+
+        if (liked) {
+            setLikedUsers(liked_users.filter((id) => id !== user.id));
+
+        }
+        else {
+            if (disliked) {
+                setDislikedUsers(disliked_users.filter((id) => id !== user.id));
+            }
+            setLikedUsers([...liked_users, user.id]);
+        }
     }
-    function handleDislike() {
-        setDisliked(!disliked);
+
+    async function handleDislike() {
+        if (disliked) {
+            setDislikedUsers(disliked_users.filter((id) => id !== user.id));
+        }
+        else {
+            if (liked) {
+                setLikedUsers(liked_users.filter((id) => id !== user.id));
+            }
+            setDislikedUsers([...disliked_users, user.id]);
+        }
     }
 
     return (
