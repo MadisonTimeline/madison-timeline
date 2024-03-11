@@ -1,7 +1,8 @@
 import { createClient } from "@/utils/supabase/client";
+
 export async function GET(request: Request) {
     try {
-        const receivedPostID = request.url.split('/').pop(); // Extracting user ID from URL
+        const receivedPostID = request.url.split('/').pop(); // Extracting post ID from URL
         const supabase = createClient();
         const { data, error } = await supabase
             .from("posts")
@@ -31,11 +32,12 @@ export async function GET(request: Request) {
         }
 
     } catch (error) {
+        console.error("Error processing request:", error);
         return new Response(
             JSON.stringify({ message: "Error processing request" }),
             {
                 headers: { "Content-Type": "application/json" },
-                status: 400
+                status: 500
             }
         );
     }
