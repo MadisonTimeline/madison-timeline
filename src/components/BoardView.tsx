@@ -25,6 +25,12 @@ async function fetchPosts(boardname: string): Promise<Post[]> {
 
     const { data, error } = response;
 
+    data?.forEach((post) => {
+        post.authorId = post.author_id;
+        delete post.author_id;
+    }
+    );
+
     if (error) {
         console.log("Error fetching posts:");
         console.error(error);
@@ -32,9 +38,8 @@ async function fetchPosts(boardname: string): Promise<Post[]> {
     }
 
     // Convert date strings to JavaScript Date objects
-    const fetchedPosts = data.map((post: { date: string | number | Date }) => ({
+    const fetchedPosts = data.map((post: { date: string | number | Date  } ) => ({
         ...post,
-        authorId: post.author_id,
         date: new Date(post.date),
     }));
 
