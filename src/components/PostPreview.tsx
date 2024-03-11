@@ -15,6 +15,7 @@ import { Post } from "@/types/Post";
 import Link from "next/link";
 
 export default function PostPreview({ post, user, setter }: { post: Post; user: any; setter: any }) {
+    console.log("post", post);
     const [liked, setLiked] = useState(post.liked_users && post.liked_users.includes(user.id));
     const [disliked, setDisliked] = useState(post.disliked_users && post.disliked_users.includes(user.id));
     const [liked_users, setLikedUsers] = useState(post.liked_users ? post.liked_users : []);
@@ -107,7 +108,7 @@ export default function PostPreview({ post, user, setter }: { post: Post; user: 
                 </Button>
                 <Label> {disliked_users.length} DISLIKES</Label>
 
-                {post.author_id === user.id && (
+                {post.authorId === user.id && (
                     <>
                         <Link href={`/post/edit/${post.id}`} >
                             <Button className="flex items-center gap-2" >
