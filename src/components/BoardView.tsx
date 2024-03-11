@@ -50,7 +50,7 @@ function BoardView({ boardname }: { boardname: string }) {
     useEffect(() => {
         fetchPosts(boardname).then(setPosts);
         setNumPosts( posts.length );
-    }, [boardname, numPosts]);
+    }, [boardname, numPosts, posts.length]);
 
     if (isLoading) return <div>Loading...</div>;
     return (
