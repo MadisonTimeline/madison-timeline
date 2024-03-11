@@ -67,10 +67,6 @@ export default function PostPreview({ post, user, setter }: { post: Post; user: 
         }
     }
 
-    async function handleEdit() {
-        console.log("Complete implementation: Edit post");
-    }
-
     async function handleDelete() {
         console.log("Complete implementation: Delete post");
         const requestData = {
@@ -113,10 +109,12 @@ export default function PostPreview({ post, user, setter }: { post: Post; user: 
 
                 {post.author_id === user.id && (
                     <>
-                        <Button className="flex items-center gap-2" onClick={handleEdit}>
-                            <EditIcon />
-                            Edit Post
-                        </Button>
+                        <Link href={`/post/edit/${post.id}`} >
+                            <Button className="flex items-center gap-2" >
+                                <EditIcon />
+                                Edit Post
+                            </Button>
+                        </Link>
 
                         <Button className="flex items-center gap-2" onClick={handleDelete}>
                             <DeleteIcon />
