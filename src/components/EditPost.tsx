@@ -65,7 +65,9 @@ export default function EditPost({
             setIsLoading(false);
         }
     };
-
+    if (!user) {
+        return <div>Not authenticated</div>;
+    }
     return (
         <Card className="w-full max-w-[350px]">
             <CardHeader>
