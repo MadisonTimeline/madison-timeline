@@ -37,7 +37,9 @@ export default function EditPost({
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+        if(!user) {
+            return;
+        }
         const editedPost = {
             post_id: postid,
             title: postTitle,
