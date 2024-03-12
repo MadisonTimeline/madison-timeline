@@ -14,7 +14,7 @@ export default function Post({ postid }: { postid: string }) {
     const [post, setPost] = useState<Post>({
         id: "",
         title: "",
-        date: "",
+        date: new Date(),
         board_name: "",
         body: "",
         likes: 0,
@@ -24,6 +24,7 @@ export default function Post({ postid }: { postid: string }) {
         liked_users: [],
         disliked_users: [],
     });
+    const [dateString, setDateString] = useState("");
 
 
     useEffect(() => {
@@ -59,7 +60,7 @@ export default function Post({ postid }: { postid: string }) {
                     const data = await response.json();
 
                     // Convert date strings to JavaScript Date objects
-                    data.date = new Date(data.date).toLocaleString();
+                    setDateString(new Date(data.date).toLocaleString());
 
                     setPost(data);
 
@@ -79,7 +80,7 @@ export default function Post({ postid }: { postid: string }) {
         <Card>
             <CardHeader>
                 <CardTitle>{post.title}</CardTitle>
-                <CardDescription>{post.date}</CardDescription>
+                <CardDescription>{dateString}</CardDescription>
             </CardHeader>
             <CardContent>
                 <p>{post.body}</p>
