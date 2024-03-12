@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/client";
+export const dynamic = "force-dynamic"; // Use this if you need to ensure the function is always executed dynamically
 
 export async function GET(request: Request) {
     try {

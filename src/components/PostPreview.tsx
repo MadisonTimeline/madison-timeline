@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
+import React, { use } from "react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-
+import { Badge } from "@/components/ui/badge";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
@@ -15,11 +15,11 @@ import { Post } from "@/types/Post";
 import Link from "next/link";
 
 export default function PostPreview({ post, user, setter }: { post: Post; user: any; setter: any }) {
-    console.log("post", post);
     const [liked, setLiked] = useState(post.liked_users && post.liked_users.includes(user.id));
     const [disliked, setDisliked] = useState(post.disliked_users && post.disliked_users.includes(user.id));
     const [liked_users, setLikedUsers] = useState(post.liked_users ? post.liked_users : []);
     const [disliked_users, setDislikedUsers] = useState(post.disliked_users ? post.disliked_users : []);
+    const [views, setViews] = useState(post.views);
 
     useEffect(() => {
         setLiked(liked_users && liked_users.includes(user.id));
@@ -46,7 +46,7 @@ export default function PostPreview({ post, user, setter }: { post: Post; user: 
         updateLikes();
     }, [liked_users, disliked_users, post.id]);
 
-    async function handleLike() {
+    function handleLike() {
         if (liked) {
             setLikedUsers(liked_users.filter((id) => id !== user.id));
         } else {
@@ -57,7 +57,7 @@ export default function PostPreview({ post, user, setter }: { post: Post; user: 
         }
     }
 
-    async function handleDislike() {
+    function handleDislike() {
         if (disliked) {
             setDislikedUsers(disliked_users.filter((id) => id !== user.id));
         } else {
@@ -91,11 +91,15 @@ export default function PostPreview({ post, user, setter }: { post: Post; user: 
                     <CardTitle>{post.title}</CardTitle>
                 </Link>
                 <CardDescription>{post.date.toLocaleString()}</CardDescription>
+                <div className="flex gap-2">
+                    <Badge variant="outline">{post.board_name}</Badge>
+                </div>
             </CardHeader>
             <CardContent>
                 <p className="truncate"> {post.body}</p>
             </CardContent>
             <CardFooter className="flex items-center gap-2">
+                <Label> {views} VIEWS</Label>
                 <Button className="flex items-center gap-2" onClick={handleLike}>
                     {liked ? <ThumbUpAltIcon /> : <ThumbUpOffAltIcon />}
                     Like

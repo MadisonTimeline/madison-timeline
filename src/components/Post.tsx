@@ -1,6 +1,6 @@
 // This is a component that will display a single post
 
-import React from 'react'
+import React, { use } from 'react'
 import { Post } from '@/types/Post'
 import { useEffect, useState } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
@@ -9,11 +9,12 @@ import { Button } from './ui/button'
 
 
 export default function Post({ postid }: { postid: string }) {
+
     // fetch the post from the server
     const [post, setPost] = useState<Post>({
         id: "",
         title: "",
-        date: new Date(),
+        date: "",
         board_name: "",
         body: "",
         likes: 0,
@@ -25,6 +26,24 @@ export default function Post({ postid }: { postid: string }) {
     });
 
 
+    useEffect(() => {
+        async function updateViews() {
+            const requestData = {
+                post_id: post.id,
+            };
+            await fetch("/api/viewPost", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestData),
+            });
+        }
+        if (post.id !== "") {
+            updateViews();
+        }
+    }, [post.id]);
+
 
     useEffect(() => {
         async function fetchPost() {
@@ -35,10 +54,15 @@ export default function Post({ postid }: { postid: string }) {
                         "Content-Type": "application/json",
                     },
                 });
-    
+
                 if (response.ok) {
                     const data = await response.json();
+
+                    // Convert date strings to JavaScript Date objects
+                    data.date = new Date(data.date).toLocaleString();
+
                     setPost(data);
+
                 } else {
                     console.error("Error fetching Post:", response.statusText);
                 }
@@ -46,7 +70,7 @@ export default function Post({ postid }: { postid: string }) {
                 console.error("Error fetching Post:", error);
             }
         }
-    
+
         fetchPost();
     }, [postid]);
 
@@ -55,17 +79,16 @@ export default function Post({ postid }: { postid: string }) {
         <Card>
             <CardHeader>
                 <CardTitle>{post.title}</CardTitle>
-                <CardDescription>{post.date.toLocaleString()}</CardDescription>
+                <CardDescription>{post.date}</CardDescription>
             </CardHeader>
             <CardContent>
-                <p> {post.body}</p>
+                <p>{post.body}</p>
             </CardContent>
             <CardFooter className='flex items-center gap-2'>
-                <Label> {post.likes} likes</Label>
-                <Label> {post.dislikes} dislikes</Label>
-                <Label> {post.views} views</Label>
+                <Label>{post.likes} likes</Label>
+                <Label>{post.dislikes} dislikes</Label>
+                <Label>{post.views} views</Label>
             </CardFooter>
         </Card>
-        
-    )
+    );
 }
