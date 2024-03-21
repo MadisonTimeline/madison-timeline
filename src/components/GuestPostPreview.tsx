@@ -11,6 +11,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
+import { Badge } from "@/components/ui/badge"
 
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
@@ -46,6 +47,9 @@ export default function GuestPostPreview({ post }: { post: Post }) {
                     <CardTitle>{post.title}</CardTitle>
                 </Link>
                 <CardDescription>{post.date.toLocaleString()}</CardDescription>
+                <div className="flex gap-2">
+                    <Badge variant="outline">{post.board_name}</Badge>
+                </div>
             </CardHeader>
             <CardContent>
                 <p className="truncate"> {post.body}</p>

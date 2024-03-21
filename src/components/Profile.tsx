@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Image from "next/image";
 
 import { User } from "@/types/User";
 
@@ -72,7 +73,12 @@ export default function Profile({ user }: { user: any }) {
         <div className="flex flex-col justify-center items-center">
             <div className="text-2xl font-bold">Profile</div>
             <div className="flex flex-col justify-center items-center gap-5">
-                <img src={picture} alt="profile picture" className="w-20 h-20 rounded-full" />
+                <Image src={picture}
+                    alt="profile picture"
+                    width={80}
+                    height={80}
+                    className="rounded-full"
+                />
                 <form>
                     <div>
                         <Label>Username</Label>
