@@ -1,7 +1,6 @@
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import React from 'react'
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import { Post } from '@/types/Post'
 
 
