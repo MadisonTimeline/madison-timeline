@@ -17,6 +17,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import { Post } from "@/types/Post"
 import Link from "next/link"
+import ProfileAvatar from "@/components/ProfileAvatar"
 
 
 
@@ -43,6 +44,7 @@ export default function GuestPostPreview({ post }: { post: Post }) {
     return (
         <Card>
             <CardHeader>
+                <ProfileAvatar post={post} showUsername={true} />
                 <Link href={`/post/${post.id}`}>
                     <CardTitle>{post.title}</CardTitle>
                 </Link>
