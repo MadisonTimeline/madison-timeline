@@ -37,7 +37,7 @@ export async function PUT(request: Request) {
             .rpc('update_post_like_dislike', {
                 dislikes_change: receivedData.dislikeChange,
                 likes_change: receivedData.likeChange, 
-                post_id: receivedData.postId
+                post_id: receivedData.post_id
             })
         if (postsError) {
             console.error("Error inserting data:");

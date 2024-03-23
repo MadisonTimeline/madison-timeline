@@ -11,7 +11,7 @@ export type Post = {
   likes: number;
   dislikes: number;
   views: number;
-  authorId: string;
+  author_id: string;
   liked_users: string[];
   disliked_users: string[];
 };

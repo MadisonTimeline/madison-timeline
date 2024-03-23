@@ -13,6 +13,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Post } from "@/types/Post";
 import Link from "next/link";
+import ProfileAvatar from "@/components/ProfileAvatar";
 
 export default function PostPreview({ post, user, setter }: { post: Post; user: any; setter: any }) {
     const [liked, setLiked] = useState(post.liked_users && post.liked_users.includes(user.id));
@@ -87,6 +88,7 @@ export default function PostPreview({ post, user, setter }: { post: Post; user: 
     return (
         <Card>
             <CardHeader>
+                    <ProfileAvatar post={post} showUsername={true} />
                 <Link href={`/post/${post.id}`}>
                     <CardTitle>{post.title}</CardTitle>
                 </Link>
@@ -112,7 +114,7 @@ export default function PostPreview({ post, user, setter }: { post: Post; user: 
                 </Button>
                 <Label> {disliked_users.length} DISLIKES</Label>
 
-                {post.authorId === user.id && (
+                {post.author_id === user.id && (
                     <>
                         <Link href={`/post/edit/${post.id}`} >
                             <Button className="flex items-center gap-2" >
