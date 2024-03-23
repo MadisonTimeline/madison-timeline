@@ -88,8 +88,7 @@ export default function PostPreview({ post, user, setter }: { post: Post; user: 
     return (
         <Card>
             <CardHeader>
-                <ProfileAvatar post={post} />
-
+                    <ProfileAvatar post={post} showUsername={true} />
                 <Link href={`/post/${post.id}`}>
                     <CardTitle>{post.title}</CardTitle>
                 </Link>

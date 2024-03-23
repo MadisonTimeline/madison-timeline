@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Post } from '@/types/Post'
 
 
-export default function ProfileAvatar({ post }: { post: Post }) {
+export default function ProfileAvatar({ post, showUsername }: { post: Post, showUsername: boolean }) {
 
     const [picture, setPicture] = useState("");
     const [username, setUsername] = useState("");
@@ -25,19 +25,23 @@ export default function ProfileAvatar({ post }: { post: Post }) {
 
     if (loading) {
         return (
-            <Image 
-                src="/avatars/default-avatar.png" 
-                alt="Avatar Placeholder" 
-                width={40} 
-                height={40} 
+            <Image
+                src="/avatars/default-avatar.png"
+                alt="Avatar Placeholder"
+                width={40}
+                height={40}
                 className="rounded-full"
             />
         )
     }
     return (
-        <Avatar>
-            <AvatarImage src={picture} />
-            <AvatarFallback>{username.charAt(0)}</AvatarFallback>
-        </Avatar>
+        <div className='flex flex-row align-center'>
+            <Avatar className='w-7 h-7'>
+                <AvatarImage src={picture} />
+                <AvatarFallback>{username.charAt(0)}</AvatarFallback>
+            </Avatar>
+            {showUsername && <span className="text-md p-1">{username}</span>}
+        </div>
+
     )
 }
