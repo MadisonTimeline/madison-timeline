@@ -28,7 +28,7 @@ export async function POST(request: Request) {
                 likes: receivedData.likes,
                 dislikes: receivedData.dislikes,
                 views: receivedData.views,
-                author_id: receivedData.authorId,
+                author_id: receivedData.author_id,
                 liked_users: receivedData.liked_users,
                 disliked_users: receivedData.disliked_users,
             })

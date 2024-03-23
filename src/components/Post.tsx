@@ -6,9 +6,12 @@ import { useEffect, useState } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
 import { Label } from './ui/label'
 import { Button } from './ui/button'
+import Profile from './Profile'
+import ProfileAvatar from './ProfileAvatar'
 
 
-export default function Post({ postid }: { postid: string }) {
+export default function Post({ post_id }: { post_id: string }) {
+    const [loading, setLoading] = useState(true);
 
     // fetch the post from the server
     const [post, setPost] = useState<Post>({
@@ -20,7 +23,7 @@ export default function Post({ postid }: { postid: string }) {
         likes: 0,
         dislikes: 0,
         views: 0,
-        authorId: "",
+        author_id: "",
         liked_users: [],
         disliked_users: [],
     });
@@ -49,7 +52,7 @@ export default function Post({ postid }: { postid: string }) {
     useEffect(() => {
         async function fetchPost() {
             try {
-                const response = await fetch(`/api/getPost/${postid}`, {
+                const response = await fetch(`/api/getPost/${post_id}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -61,9 +64,10 @@ export default function Post({ postid }: { postid: string }) {
 
                     // Convert date strings to JavaScript Date objects
                     setDateString(new Date(data.date).toLocaleString());
-
                     setPost(data);
-
+                    console.log(data);
+                    console.log(post);
+                    setLoading(false);
                 } else {
                     console.error("Error fetching Post:", response.statusText);
                 }
@@ -73,12 +77,15 @@ export default function Post({ postid }: { postid: string }) {
         }
 
         fetchPost();
-    }, [postid]);
+    }, [post_id]);
 
-
+    if (loading) {
+        return <p>Loading...</p>;
+    } 
     return (
         <Card>
             <CardHeader>
+                <ProfileAvatar post={post} showUsername={true} />
                 <CardTitle>{post.title}</CardTitle>
                 <CardDescription>{dateString}</CardDescription>
             </CardHeader>

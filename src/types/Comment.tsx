@@ -5,6 +5,6 @@ export type Comment = {
     date: Date;
     content: string;
     author: string;
-    authorId: string;
+    author_id: string;
   };
   

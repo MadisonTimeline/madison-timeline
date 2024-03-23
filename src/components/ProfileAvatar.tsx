@@ -13,7 +13,7 @@ export default function ProfileAvatar({ post, showUsername }: { post: Post, show
 
     useEffect(() => {
         async function getProfilePicture() {
-            const res = await fetch(`/api/getProfile/${post.authorId}`);
+            const res = await fetch(`/api/getProfile/${post.author_id}`);
             const data = await res.json();
             setPicture(data.picture);
             console.log(data.picture);
@@ -21,19 +21,8 @@ export default function ProfileAvatar({ post, showUsername }: { post: Post, show
             setLoading(false);
         }
         getProfilePicture();
-    }, [post.authorId]);
+    }, [post.author_id]);
 
-    if (loading) {
-        return (
-            <Image
-                src="/avatars/default-avatar.png"
-                alt="Avatar Placeholder"
-                width={40}
-                height={40}
-                className="rounded-full"
-            />
-        )
-    }
     return (
         <div className='flex flex-row align-center'>
             <Avatar className='w-7 h-7'>

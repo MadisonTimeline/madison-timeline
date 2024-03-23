@@ -17,7 +17,7 @@ function CommentSection({ postid, user }: { postid: string, user: any }) {
             date: new Date(),
             content: content,
             author: user.given_name,
-            authorId: user.id,
+            author_id: user.id,
 
         };
         setComments([...comments, newComment]);

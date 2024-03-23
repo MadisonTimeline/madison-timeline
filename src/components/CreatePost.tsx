@@ -34,7 +34,7 @@ export default function CreatePost({
             likes: 0,
             dislikes: 0,
             views: 0,
-            authorId: user.id,
+            author_id: user.id,
             liked_users: [],
             disliked_users: [],
         };
