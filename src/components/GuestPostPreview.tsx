@@ -60,16 +60,12 @@ export default function GuestPostPreview({ post }: { post: Post }) {
 
                 <Button className="flex items-center gap-2" onClick={handleLike}>
                     <ThumbUpOffAltIcon />
-
-                    Like
+                    {liked_users.length}
                 </Button>
-                <Label> {liked_users.length} LIKES</Label>
                 <Button className="flex items-center gap-2" onClick={handleDislike}>
                     <ThumbDownOffAltIcon />
-
-                    Dislike
+                    {disliked_users.length}
                 </Button>
-                <Label> {disliked_users.length} DISLIKES</Label>
             </CardFooter>
         </Card>
     )
