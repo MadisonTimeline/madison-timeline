@@ -104,28 +104,24 @@ export default function PostPreview({ post, user, setter }: { post: Post; user: 
                 <Label> {views} VIEWS</Label>
                 <Button className="flex items-center gap-2" onClick={handleLike}>
                     {liked ? <ThumbUpAltIcon /> : <ThumbUpOffAltIcon />}
-                    Like
+                    {liked_users.length}
                 </Button>
-                <Label> {liked_users.length} LIKES</Label>
 
                 <Button className="flex items-center gap-2" onClick={handleDislike}>
                     {disliked ? <ThumbDownAltIcon /> : <ThumbDownOffAltIcon />}
-                    Dislike
+                    {disliked_users.length}
                 </Button>
-                <Label> {disliked_users.length} DISLIKES</Label>
 
                 {post.author_id === user.id && (
                     <>
                         <Link href={`/post/edit/${post.id}`} >
                             <Button className="flex items-center gap-2" >
                                 <EditIcon />
-                                Edit Post
                             </Button>
                         </Link>
 
                         <Button className="flex items-center gap-2" onClick={handleDelete}>
                             <DeleteIcon />
-                            Delete Post
                         </Button>
                     </>
                 )}
