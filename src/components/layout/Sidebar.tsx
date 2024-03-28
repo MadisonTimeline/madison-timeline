@@ -81,6 +81,11 @@ export default function Sidebar({ show, setter }: { show: boolean, setter: React
                         route="/boards/notes"
                         icon={<TextSnippetOutlinedIcon />}
                     />
+                    <MenuItem
+                        name="Explore-Boards"
+                        route="/explore-boards"
+                        icon={<TextSnippetOutlinedIcon />}
+                    />
                     <div className='flex flex-row p-5 justify-between'>
                         {
                             isLoading ? (

@@ -1,9 +1,12 @@
 import React from "react";
+import ExploreBoardsView from "@/components/ExploreBoardsView";
 
 export default function ExploreBoardsPage() {
+
+
+
     return (
-        <div>
-            <h1>Explore Boards</h1>
-        </div>
+        <ExploreBoardsView />
+
     );
 }
