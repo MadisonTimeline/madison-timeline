@@ -4,7 +4,7 @@ import BoardPreview from '@/components/BoardPreview';
 
 import { useSearchParams } from 'next/navigation'
 import { SearchInput } from '@/components/search/SearchInput';
-import Board from '@/types/Board';
+import { Board } from '@/types/Board';
 
 export default function ExploreBoardsView() {
     const [boards, setBoards] = useState<Board[]>([]);
