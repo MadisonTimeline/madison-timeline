@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import BoardPreview from '@/components/BoardPreview';
-
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation'
 import { SearchInput } from '@/components/search/SearchInput';
 import { Board } from '@/types/Board';
@@ -15,38 +15,24 @@ export default function ExploreBoardsView() {
             .then((response) => response.json())
             .then((data) => setBoards(data));
     }, []);
-
-
     const searchParams = useSearchParams();
     const searchQuery = searchParams && searchParams.get("q"); // we use `q` to set the query to the browser, it could be anything
 
     useEffect(() => {
-
         const handleSearch = () => {
-
             const findBoard = boards.filter((board) => {
-
                 if (searchQuery) {
-
                     return (
                         board.name.toLowerCase().includes(searchQuery.toLowerCase())
                     );
-
                 } else {
                     // If no search query, return the original data
                     return true;
-
                 }
-
             });
-
             // Set the filtered data to the state
-
             setBoards(findBoard);
-
         };
-
-
         // Call handleSearch when searchQuery changes
         handleSearch();
 
@@ -60,8 +46,8 @@ export default function ExploreBoardsView() {
 
         <section className='m-10'>
 
+                <SearchInput defaultValue={searchQuery} />
 
-            <SearchInput defaultValue={searchQuery} />
 
             <p className="mt-10 ">Showing {totalBoards} {totalBoards > 1 ? "Boards" : "Boards"}</p>
 

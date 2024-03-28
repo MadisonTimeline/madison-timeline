@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ExploreBoardsView from "@/components/ExploreBoardsView";
 
 export default function ExploreBoardsPage() {
@@ -6,7 +6,9 @@ export default function ExploreBoardsPage() {
 
 
     return (
-        <ExploreBoardsView />
+        <Suspense fallback={<div>Loading...</div>}>
+            <ExploreBoardsView />
+        </Suspense>
 
     );
 }
