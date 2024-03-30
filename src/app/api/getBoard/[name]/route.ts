@@ -5,10 +5,21 @@ export async function GET(request: Request) {
     try {
         const receivedBoardName = request.url.split('/').pop(); // Extracting board name from URL
         const supabase = createClient();
+
+        if (!receivedBoardName) {
+            return new Response(
+                JSON.stringify({ message: "Board Name not Provided" }),
+                {
+                    headers: { "Content-Type": "application/json" },
+                    status: 400
+                }
+            );
+        }
+
         const { data, error } = await supabase
             .from("boards")
             .select("*")
-            .eq("name", receivedBoardName);
+            .ilike("name", receivedBoardName);
 
         if (error) {
             throw new Error(error.message);

@@ -62,17 +62,11 @@ export default function ExploreBoardsView() {
                     <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-5">
 
                         {boards.map(({ name, description }: Board) => {
-
                             return (
-
                                 <div key={name}>
-
                                     <BoardPreview name={name} description={description} />
-
                                 </div>
-
                             )
-
                         })}
                     </div>
                 )}
