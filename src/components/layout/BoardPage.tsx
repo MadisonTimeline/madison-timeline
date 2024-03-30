@@ -1,13 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from './Layout'
 import BoardView from '../BoardView'
 
-export default function BoardPage({ name }: { name: string}) {
+export default function BoardPage({ name }: { name: string }) {
     const [boardName, setBoardName] = useState<string>("")
-    const [description, setDescription] = useState<string | null>(null)
+    const [description, setDescription] = useState<string>("")
     const [loading, setLoading] = useState<boolean>(true)
-
-
 
     useEffect(() => {
         async function fetchBoard() {
@@ -31,7 +29,8 @@ export default function BoardPage({ name }: { name: string}) {
             }
         }
 
-        fetchBoard()
+        if (name)
+            fetchBoard()
     }, [name])
 
 
@@ -46,7 +45,7 @@ export default function BoardPage({ name }: { name: string}) {
                     <p>{description}</p>
                 </div>
                 <div>
-                    <BoardView boardname={boardName}/>
+                    <BoardView boardname={boardName} />
                 </div>
             </div>
         </Layout>

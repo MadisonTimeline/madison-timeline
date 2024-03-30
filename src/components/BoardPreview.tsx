@@ -9,10 +9,8 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from "next/link";
-import { useRouter } from 'next/router';
 
 export default function BoardPreview({ name, description }: { name: string, description: string }) {
-
     return (
         <Card>
             <CardHeader>
@@ -23,11 +21,10 @@ export default function BoardPreview({ name, description }: { name: string, desc
             </CardContent>
 
             <CardFooter>
-                <Link href={`/boards/${name.toLowerCase()}`}>
+                <Link href={`/boards/${encodeURIComponent(name)}`}>
                     <Button>View Board</Button>
                 </Link>
             </CardFooter>
         </Card>
     );
 }
-
