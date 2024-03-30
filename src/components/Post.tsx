@@ -46,7 +46,7 @@ export default function Post({ post_id }: { post_id: string }) {
         if (post.id !== "") {
             updateViews();
         }
-    }, [post.id]);
+    }, [post]);
 
 
     useEffect(() => {
@@ -65,8 +65,6 @@ export default function Post({ post_id }: { post_id: string }) {
                     // Convert date strings to JavaScript Date objects
                     setDateString(new Date(data.date).toLocaleString());
                     setPost(data);
-                    console.log(data);
-                    console.log(post);
                     setLoading(false);
                 } else {
                     console.error("Error fetching Post:", response.statusText);

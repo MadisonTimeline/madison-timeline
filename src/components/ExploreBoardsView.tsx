@@ -36,7 +36,7 @@ export default function ExploreBoardsView() {
         // Call handleSearch when searchQuery changes
         handleSearch();
 
-    }, [searchQuery]);
+    }, [searchQuery, boards]);
 
 
 

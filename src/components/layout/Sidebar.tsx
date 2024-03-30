@@ -7,6 +7,8 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import TextSnippetOutlinedIcon from '@mui/icons-material/TextSnippetOutlined';
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import FoodBankOutlinedIcon from '@mui/icons-material/FoodBankOutlined';
+
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { Button } from '../ui/button';
 
@@ -62,29 +64,19 @@ export default function Sidebar({ show, setter }: { show: boolean, setter: React
                 </div>
                 <div className="flex flex-col">
                     <MenuItem
-                        name="All"
+                        name="All Posts"
                         route="/boards"
                         icon={<HomeRoundedIcon />}
-                    />
-                    <MenuItem
-                        name="Social"
-                        route="/boards/social"
-                        icon={<ConnectWithoutContactIcon />}
-                    />
-                    <MenuItem
-                        name="Foods"
-                        route="/boards/foods"
-                        icon={<FoodBankOutlinedIcon />}
-                    />
-                    <MenuItem
-                        name="Notes"
-                        route="/boards/notes"
-                        icon={<TextSnippetOutlinedIcon />}
                     />
                     <MenuItem
                         name="Explore-Boards"
                         route="/explore-boards"
                         icon={<TextSnippetOutlinedIcon />}
+                    />
+                    <MenuItem
+                        name="Profile"
+                        route="/profile"
+                        icon={<AccountCircleRoundedIcon />}
                     />
                     <div className='flex flex-row p-5 justify-between'>
                         {
