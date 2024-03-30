@@ -26,8 +26,6 @@ export const SearchInput = ({ defaultValue }: iDefault) => {
 
     }
 
-
-
     // If the user clicks enter on the keyboard, the input value should be submitted for search 
 
     // We are now routing the search results to another page but still on the same page
