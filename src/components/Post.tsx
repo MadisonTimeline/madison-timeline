@@ -6,12 +6,14 @@ import { useEffect, useState } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
 import { Label } from './ui/label'
 import { Button } from './ui/button'
+import CommentSection from './CommentSection'
 import Profile from './Profile'
 import ProfileAvatar from './ProfileAvatar'
 
 
 export default function Post({ post_id }: { post_id: string }) {
     const [loading, setLoading] = useState(true);
+    const [showComments, setShowComments] = useState(false);
 
     // fetch the post from the server
     const [post, setPost] = useState<Post>({
@@ -79,22 +81,31 @@ export default function Post({ post_id }: { post_id: string }) {
 
     if (loading) {
         return <p>Loading...</p>;
-    } 
+    }
     return (
-        <Card>
-            <CardHeader>
-                <ProfileAvatar post={post} showUsername={true} />
-                <CardTitle>{post.title}</CardTitle>
-                <CardDescription>{dateString}</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <p>{post.body}</p>
-            </CardContent>
-            <CardFooter className='flex items-center gap-2'>
-                <Label>{post.likes} likes</Label>
-                <Label>{post.dislikes} dislikes</Label>
-                <Label>{post.views} views</Label>
-            </CardFooter>
-        </Card>
+        <>
+            <Card>
+                <CardHeader>
+                    <ProfileAvatar post={post} showUsername={true} />
+                    <CardTitle>{post.title}</CardTitle>
+                    <CardDescription>{dateString}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <p>{post.body}</p>
+                </CardContent>
+                <CardFooter className='flex items-center gap-2'>
+                    <Label>{post.likes} likes</Label>
+                    <Label>{post.dislikes} dislikes</Label>
+                    <Label>{post.views} views</Label>
+                    {
+                        showComments ?
+                            <Label onClick={() => setShowComments(false)}>Hide Comments</Label>
+                            :
+                            <Label onClick={() => setShowComments(true)}>Show Comments</Label>
+                    }
+                </CardFooter>
+            </Card>
+            <CommentSection post_id={post.id} showComments={showComments} />
+        </>
     );
 }
