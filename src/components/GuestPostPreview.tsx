@@ -44,7 +44,7 @@ export default function GuestPostPreview({ post }: { post: Post }) {
     return (
         <Card>
             <CardHeader>
-                <ProfileAvatar post={post} showUsername={true} />
+                <ProfileAvatar author_id={post.author_id} showUsername={true} />
                 <Link href={`/post/${post.id}`}>
                     <CardTitle>{post.title}</CardTitle>
                 </Link>

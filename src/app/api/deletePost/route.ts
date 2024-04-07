@@ -22,7 +22,18 @@ export async function POST(request: Request) {
 
         // Delete post data from Supabase database
         const supabase = createClient();
-        const { error } = await supabase
+        {
+            let { error } = await supabase
+                .from('comments')
+                .delete()
+                .eq('post_id', receivedData.post_id)
+
+            if (error) {
+                throw new Error("Error deleting comments");
+            }
+        }
+
+        let { error } = await supabase
             .from('posts')
             .delete()
             .eq('id', receivedData.post_id)
@@ -31,9 +42,7 @@ export async function POST(request: Request) {
 
         // Check for errors during insertion
         if (error) {
-            console.error("Error inserting data:");
-            console.error(error);
-            throw new Error("Error inserting user data");
+            throw new Error("Error deleting post");
         }
 
         // Return success response to client

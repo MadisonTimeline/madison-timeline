@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { Post } from '@/types/Post'
 
 
-export default function ProfileAvatar({ post, showUsername }: { post: Post, showUsername: boolean }) {
+export default function ProfileAvatar({ author_id, showUsername }: { author_id: string, showUsername: boolean }) {
 
     const [picture, setPicture] = useState("");
     const [username, setUsername] = useState("");
@@ -12,15 +12,14 @@ export default function ProfileAvatar({ post, showUsername }: { post: Post, show
 
     useEffect(() => {
         async function getProfilePicture() {
-            const res = await fetch(`/api/getProfile/${post.author_id}`);
+            const res = await fetch(`/api/getProfile/${author_id}`);
             const data = await res.json();
             setPicture(data.picture);
-            console.log(data.picture);
             setUsername(data.username);
             setLoading(false);
         }
         getProfilePicture();
-    }, [post.author_id]);
+    }, [author_id]);
 
     return (
         <div className='flex flex-row align-center'>
