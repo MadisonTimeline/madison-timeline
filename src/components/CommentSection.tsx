@@ -29,7 +29,7 @@ function CommentSection({ post_id, showComments }: { post_id: string, showCommen
             fetchComments();
             setNumComments(comments.length);
         }
-    }, [post_id, showComments, numComments, editedFlag]);
+    }, [post_id, showComments, numComments, editedFlag, comments.length]);
 
     
 
