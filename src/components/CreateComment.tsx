@@ -34,6 +34,7 @@ export default function CreateComment({
             date: new Date(),
             content: content,
             author_id: user.id,
+            edited: false,
         };
 
         const response = await fetch("/api/createComment", {

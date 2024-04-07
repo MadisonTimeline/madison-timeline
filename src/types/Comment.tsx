@@ -5,5 +5,6 @@ export type Comment = {
     date: Date;
     content: string;
     author_id: string;
+    edited: boolean;
   };
   

@@ -39,6 +39,7 @@ export default function CommentObject({
         const editedComment: Comment = {
             ...comment,
             content: content,
+            edited: true,
         };
 
         const response = await fetch("/api/editComment", {
@@ -78,7 +79,9 @@ export default function CommentObject({
         <Card>
             <CardHeader>
                 <ProfileAvatar author_id={comment.author_id} showUsername={true} />
-                <CardDescription className='font-light text-xs'>{comment.date.toLocaleString()}</CardDescription>
+                {comment.edited ? <CardDescription className='font-light text-xs'>{comment.date.toLocaleString()} {" edited"}</CardDescription> :
+                    <CardDescription className='font-light text-xs'>{comment.date.toLocaleString()}</CardDescription>}
+                
             </CardHeader>
             <CardContent>
                 {editMode ? (

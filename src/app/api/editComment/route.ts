@@ -9,7 +9,7 @@ export async function POST(request: Request) {
         const receivedData = await request.json();
 
         // Validate required fields
-        const requiredFields = ['id', 'post_id', 'date', 'content', 'author_id'];
+        const requiredFields = ['id', 'post_id', 'date', 'content', 'author_id', 'edited'];
         for (const field of requiredFields) {
             if (!receivedData[field]) {
                 throw new Error(`Missing required field: ${field}`);
@@ -22,6 +22,7 @@ export async function POST(request: Request) {
             .from('comments')
             .update({
                 content: receivedData.content,
+                edited: receivedData.edited,
             })
             .eq('id', receivedData.id)
             .eq('author_id', receivedData.author_id)
