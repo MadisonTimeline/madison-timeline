@@ -15,7 +15,18 @@ import { Post } from "@/types/Post";
 import Link from "next/link";
 import ProfileAvatar from "@/components/ProfileAvatar";
 
-export default function PostPreview({ post, user, setter }: { post: Post; user: any; setter: any }) {
+export default function PostPreview({
+    post,
+    user,
+    numPosts,
+    setNumPosts,
+
+}: {
+    post: Post;
+    user: any;
+    numPosts: number;
+    setNumPosts: (numPosts: number) => void;
+}) {
     const [liked, setLiked] = useState(post.liked_users && post.liked_users.includes(user.id));
     const [disliked, setDisliked] = useState(post.disliked_users && post.disliked_users.includes(user.id));
     const [liked_users, setLikedUsers] = useState(post.liked_users ? post.liked_users : []);
@@ -70,7 +81,6 @@ export default function PostPreview({ post, user, setter }: { post: Post; user: 
     }
 
     async function handleDelete() {
-        console.log("Complete implementation: Delete post");
         const requestData = {
             post_id: post.id,
             user_id: user.id,
@@ -82,13 +92,13 @@ export default function PostPreview({ post, user, setter }: { post: Post; user: 
             },
             body: JSON.stringify(requestData),
         });
-        setter((prev: number) => prev - 1);
+        setNumPosts(numPosts - 1);
     }
 
     return (
         <Card>
             <CardHeader>
-                    <ProfileAvatar author_id={post.author_id} showUsername={true} />
+                <ProfileAvatar author_id={post.author_id} showUsername={true} />
                 <Link href={`/post/${post.id}`}>
                     <CardTitle>{post.title}</CardTitle>
                 </Link>

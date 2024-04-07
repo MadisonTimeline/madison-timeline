@@ -57,7 +57,7 @@ function BoardView({ boardname }: { boardname: string }) {
         <div className=" flex flex-col justify-center align-center m-10">
             <div className="h-[77vh] overflow-auto gap-3 xl:max-w-[calc(100vw-250px)] md:max-w-[calc(100vw-250px)] sm:max-w-[100vw]">
                 {user
-                    ? posts && posts.map((post) => <PostPreview key={post.id} post={post} user={user} setter={setNumPosts}/>)
+                    ? posts && posts.map((post) => <PostPreview key={post.id} post={post} user={user} numPosts={numPosts} setNumPosts={setNumPosts}/>)
                     : posts && posts.map((post) => <GuestPostPreview key={post.id} post={post} />)}
             </div>
 

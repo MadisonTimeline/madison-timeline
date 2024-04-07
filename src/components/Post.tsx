@@ -13,7 +13,7 @@ import ProfileAvatar from './ProfileAvatar'
 
 export default function Post({ post_id }: { post_id: string }) {
     const [loading, setLoading] = useState(true);
-    const [showComments, setShowComments] = useState(false);
+    const [showComments, setShowComments] = useState(true);
 
     // fetch the post from the server
     const [post, setPost] = useState<Post>({
