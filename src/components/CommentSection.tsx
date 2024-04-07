@@ -7,6 +7,8 @@ import CreateComment from './CreateComment';
 function CommentSection({ post_id, showComments }: { post_id: string, showComments: boolean }) {
     const [content, setContent] = useState('');
     const [comments, setComments] = useState<Comment[]>([]);
+    const [numComments, setNumComments] = useState(0);
+    const [editedFlag, setEditedFlag] = useState(0);
 
     useEffect(() => {
         const fetchComments = async () => {
@@ -25,8 +27,9 @@ function CommentSection({ post_id, showComments }: { post_id: string, showCommen
 
         if (showComments) {
             fetchComments();
+            setNumComments(comments.length);
         }
-    }, [post_id, showComments]);
+    }, [post_id, showComments, numComments, editedFlag]);
 
     
 
@@ -39,8 +42,8 @@ function CommentSection({ post_id, showComments }: { post_id: string, showCommen
 
             }
             {showComments && comments.map((comment) => (
-                <div key={comment.id} className='h-auto overflow-auto text-sm'>
-                    <CommentObject comment={comment} />
+                <div key={comment.id} className='h-auto overflow-auto text-sm p-1'>
+                    <CommentObject comment={comment} numComments={numComments} setNumComments={setNumComments} editedFlag={editedFlag} setEditedFlag={setEditedFlag}/>
                 </div>
             ))}
             {showComments &&
