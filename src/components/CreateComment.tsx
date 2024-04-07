@@ -55,14 +55,14 @@ export default function CreateComment({
     };
 
     return (
-        <form className='flex flex-row align-center justify-center' onSubmit={handleSubmit}>
+        <form className='flex flex-row p-1' onSubmit={handleSubmit}>
             <Textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 placeholder="Add a Comment"
                 required
             />
-            <Button type='submit' className='flex flex-col'><SendRoundedIcon /></Button>
+            <Button type='submit' className='' >Post</Button>
         </form>
     )
 }
