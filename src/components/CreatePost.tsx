@@ -51,9 +51,6 @@ export default function CreatePost({
             const createPostResponse = await response.json();
             const postData = createPostResponse.post;
 
-            console.log(createPostResponse.message);
-            console.log(createPostResponse.post);
-
             // Convert the date string to a Date object
             if (postData && postData.date) {
                 postData.date = new Date(postData.date);

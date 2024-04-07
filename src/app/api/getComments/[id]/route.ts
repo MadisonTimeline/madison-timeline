@@ -6,9 +6,9 @@ export async function GET(request: Request) {
         const receivedPostID = request.url.split('/').pop(); // Extracting post ID from URL
         const supabase = createClient();
         const { data, error } = await supabase
-            .from("posts")
+            .from("comments")
             .select("*")
-            .eq("id", receivedPostID);
+            .eq("post_id", receivedPostID);
 
         if (error) {
             throw new Error(error.message);
@@ -24,7 +24,7 @@ export async function GET(request: Request) {
             );
         } else {
             return new Response(
-                JSON.stringify(data[0]),
+                JSON.stringify(data),
                 {
                     headers: { "Content-Type": "application/json" },
                     status: 200

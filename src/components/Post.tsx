@@ -1,6 +1,6 @@
 // This is a component that will display a single post
 
-import React, { use } from 'react'
+import React from 'react'
 import { Post } from '@/types/Post'
 import { useEffect, useState } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
@@ -86,7 +86,7 @@ export default function Post({ post_id }: { post_id: string }) {
         <>
             <Card>
                 <CardHeader>
-                    <ProfileAvatar post={post} showUsername={true} />
+                    <ProfileAvatar author_id={post.author_id} showUsername={true} />
                     <CardTitle>{post.title}</CardTitle>
                     <CardDescription>{dateString}</CardDescription>
                 </CardHeader>

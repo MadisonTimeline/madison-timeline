@@ -8,10 +8,6 @@ export async function POST(request: Request) {
         // Parse request body
         const receivedData = await request.json();
 
-        // Log received data
-        console.log("Received data:");
-        console.log(receivedData);
-
         // Validate required fields
         const requiredFields = ['post_id'];
         for (const field of requiredFields) {
