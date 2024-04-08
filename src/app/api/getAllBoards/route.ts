@@ -11,7 +11,6 @@ export async function GET(request: Request) {
         if (error) {
             throw new Error(error.message);
         }
-        console.log(data);
 
         if (!data || data.length === 0) {
             return new Response(

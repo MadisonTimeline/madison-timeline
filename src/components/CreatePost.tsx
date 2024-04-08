@@ -5,22 +5,22 @@ import { Label } from "@/components/ui/label";
 import { Post } from "@/types/Post";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import SelectBoards from "./SelectBoards";
 
 export default function CreatePost({
     posts,
     setPosts,
-    boardname,
     user,
     setter,
 }: {
     posts: Post[];
     setPosts: (posts: Post[]) => void;
-    boardname: string;
     user: any;
     setter: any;
 }) {
     const [postTitle, setPostTitle] = useState("");
     const [postBody, setPostBody] = useState("");
+    const [selectedBoardname, setSelectedBoardname] = useState<string[]>([]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -29,7 +29,7 @@ export default function CreatePost({
             id: uuidv4(),
             title: postTitle,
             date: new Date(),
-            board_name: boardname,
+            board_names: selectedBoardname,
             body: postBody,
             likes: 0,
             dislikes: 0,
@@ -76,6 +76,12 @@ export default function CreatePost({
                 <form>
                     <div className="grid w-full items-center gap-4">
                         <div className="flex flex-col space-y-1.5">
+                            <Label htmlFor="boardname">Board</Label>
+                            <SelectBoards
+                                boardnames={selectedBoardname}
+                                setBoardnames={setSelectedBoardname}
+                            />
+
                             <Label htmlFor="name">Title</Label>
                             <Input id="name" placeholder="Title" onChange={(e) => setPostTitle(e.target.value)} />
                         </div>
