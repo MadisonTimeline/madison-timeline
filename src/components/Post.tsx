@@ -20,7 +20,7 @@ export default function Post({ post_id }: { post_id: string }) {
         id: "",
         title: "",
         date: new Date(),
-        board_name: "",
+        board_names: [],
         body: "",
         likes: 0,
         dislikes: 0,

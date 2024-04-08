@@ -19,7 +19,7 @@ async function fetchPosts(boardname: string): Promise<Post[]> {
         response = await supabase
             .from("posts")
             .select()
-            .eq("board_name", boardname)
+            .contains("board_names", [boardname])
             .order("date", { ascending: false });
     }
 
@@ -73,7 +73,7 @@ function BoardView({ boardname }: { boardname: string }) {
                         <Button onClick={() => setCreatePostModal(false)} className="absolute right-3 top-3">
                             X
                         </Button>
-                        <CreatePost posts={posts} setPosts={setPosts} boardname={boardname} user={user} setter={setCreatePostModal} />
+                        <CreatePost posts={posts} setPosts={setPosts} user={user} setter={setCreatePostModal} />
                     </>
                 )}
             </div>

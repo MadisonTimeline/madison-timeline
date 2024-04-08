@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
@@ -28,16 +29,25 @@ export default function GuestPostPreview({ post }: { post: Post }) {
     function handleLike() {
         // alert the user if they are not logged in
 
-        alert("You must be logged in to like a post");
-        return;
+
+        return (
+            <Alert variant="default">
+                <AlertTitle>Not logged in</AlertTitle>
+                <AlertDescription>You must be logged in to like a post</AlertDescription>
+            </Alert>
+        );
 
     }
 
     function handleDislike() {
         // alert the user if they are not logged in
 
-        alert("You must be logged in to dislike a post");
-        return;
+        return (
+            <Alert variant="default">
+                <AlertTitle>Not logged in</AlertTitle>
+                <AlertDescription>You must be logged in to dislike a post</AlertDescription>
+            </Alert>
+        );
 
     }
 
@@ -50,7 +60,11 @@ export default function GuestPostPreview({ post }: { post: Post }) {
                 </Link>
                 <CardDescription>{post.date.toLocaleString()}</CardDescription>
                 <div className="flex gap-2">
-                    <Badge variant="outline">{post.board_name}</Badge>
+                    {
+                        post.board_names.map((board_name) => (
+                            <Badge key={board_name} variant="outline">{board_name}</Badge>
+                        ))
+                    }
                 </div>
             </CardHeader>
             <CardContent>

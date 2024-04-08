@@ -104,7 +104,11 @@ export default function PostPreview({
                 </Link>
                 <CardDescription>{post.date.toLocaleString()}</CardDescription>
                 <div className="flex gap-2">
-                    <Badge variant="outline">{post.board_name}</Badge>
+                    {
+                        post.board_names.map((board_name) => (
+                            <Badge key={board_name} variant="outline">{board_name}</Badge>
+                        ))
+                    }
                 </div>
             </CardHeader>
             <CardContent>
