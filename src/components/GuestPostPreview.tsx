@@ -30,24 +30,16 @@ export default function GuestPostPreview({ post }: { post: Post }) {
         // alert the user if they are not logged in
 
 
-        return (
-            <Alert variant="default">
-                <AlertTitle>Not logged in</AlertTitle>
-                <AlertDescription>You must be logged in to like a post</AlertDescription>
-            </Alert>
-        );
+        alert("You must be logged in to like a post");
+        return;
 
     }
 
     function handleDislike() {
         // alert the user if they are not logged in
 
-        return (
-            <Alert variant="default">
-                <AlertTitle>Not logged in</AlertTitle>
-                <AlertDescription>You must be logged in to dislike a post</AlertDescription>
-            </Alert>
-        );
+        alert("You must be logged in to dislike a post");
+        return;
 
     }
 
