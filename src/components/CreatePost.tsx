@@ -7,6 +7,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import SelectBoards from "./SelectBoards";
 
+
 export default function CreatePost({
     posts,
     setPosts,
@@ -24,6 +25,10 @@ export default function CreatePost({
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if( selectedBoardname.length === 0) {
+            alert("Please select a board");
+            return;
+        }
         
         const newPost: Post = {
             id: uuidv4(),

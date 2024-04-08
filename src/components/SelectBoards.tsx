@@ -42,7 +42,7 @@ export default function SelectBoards({
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+            <DropdownMenuTrigger>Select Board</DropdownMenuTrigger>
             <DropdownMenuContent className="overflow-auto xl:max-h-[150px] md:max-h-[100px]">
                 {boards.map((board) => (
                     <DropdownMenuLabel key={board} >
