@@ -126,7 +126,7 @@ export default function PostPreview({
                     {disliked_users.length}
                 </Button>
 
-                {post.author_id === user.id && (
+                {user && post.author_id === user.id && (
                     <>
                         <Link href={`/post/edit/${post.id}`} >
                             <Button className="flex items-center gap-2" >
