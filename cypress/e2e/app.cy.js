@@ -5,7 +5,7 @@ describe('Landing Page', () => {
     cy.get('h1').should('contain', 'Welcome to Madison Timeline');
 
     // Button should contain 'Get Started'
-    cy.contains('Get Started').click();
+    cy.contains('START AS GUEST').click();
     // URL should include '/boards' after clicking the button
     cy.url().should('include', '/boards')
   });
