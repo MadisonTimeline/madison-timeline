@@ -14,7 +14,7 @@ export default function ExploreBoardsView() {
         fetch('/api/getAllBoards')
             .then((response) => response.json())
             .then((data) => setBoards(data));
-    }, []);
+    }, [boards]);
     const searchParams = useSearchParams();
     const searchQuery = searchParams && searchParams.get("q"); // we use `q` to set the query to the browser, it could be anything
 
