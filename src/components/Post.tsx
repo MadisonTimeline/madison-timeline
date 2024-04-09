@@ -85,6 +85,10 @@ export default function Post({ post_id }: { post_id: string }) {
     }, [post_id]);
 
     async function handleDelete() {
+        if(!user) {
+            alert("You must be logged in to delete a post");
+            return;
+        }
         const requestData = {
             post_id: post.id,
             user_id: user.id,
