@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from '../Logo.png';
-import { LoginLink, useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { RegisterLink, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 export default function Home() {
   return (
@@ -13,11 +14,11 @@ export default function Home() {
       </h2>
 
       <div className="mb-16 flex flex-col items-center space-y-1">
-        <div className="flex justify-center items-center w-80 h-14 bg-[#D80100] text-white font-bold rounded-3xl">
-          <LoginLink >
+        <LoginLink >
+          <div className="flex justify-center items-center w-80 h-14 bg-[#D80100] text-white font-bold rounded-3xl">
             LOGIN
-          </LoginLink>
-        </div>
+          </div>
+        </LoginLink>
 
         <Link href="/boards" passHref className="flex justify-center items-center w-80 h-14 bg-[#D9D9D9] text-black font-bold rounded-3xl">
           START AS GUEST
