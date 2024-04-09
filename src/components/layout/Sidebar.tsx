@@ -5,7 +5,6 @@ import { MoreVertical, ChevronLast, ChevronFirst, BookmarkPlus } from "lucide-re
 import Image from "next/image";
 import logo from '../../Logo.png';
 import photo from '../../BuckyBadger.png';
-import classNames from "classnames";
 
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
@@ -24,32 +23,19 @@ export default function Sidebar({ show, setter }) {
   const [expanded, setExpanded] = useState(true);
   const { isLoading, user } = useKindeBrowserClient();
 
-  // MenuItem component adjusted for expanded state
+  const sidebarClasses = `h-screen flex flex-col bg-white border-r shadow-sm ${expanded ? "w-64" : "w-20"}`;
+
   const MenuItem = ({ icon, name, route }) => {
+    const menuItemClasses = `text-sm flex gap-1 items-center text-md p-3 border-b border-b-white/10 transition-colors duration-300 ease-in-out ${expanded ? "pl-6 py-3 hover:bg-[#C5050C] hover:text-white active:bg-[#C5050C] active:text-white" : "justify-center"}`;
+
     return (
-      <Link href={route}
-          className={classNames(
-            "text-sm flex gap-1 items-center text-md p-3 border-b border-b-white/10 transition-colors duration-300 ease-in-out",
-            {
-              "pl-6 py-3 hover:bg-[#C5050C] hover:text-white active:bg-[#C5050C] active:text-white": expanded,
-              "justify-center": !expanded,
-            }
-          )}
-          onClick={() => setter(oldVal => !oldVal)}
-        >
-      <div className="text-xl small-icon">{icon}</div>
+      <Link href={route} onClick={() => setter(oldVal => !oldVal)} className={menuItemClasses}>
+          <div className="text-xl small-icon">{icon}</div>
           {expanded && <div>{name}</div>}
       </Link>
     );
   };
 
-  const sidebarClasses = classNames(
-    "h-screen flex flex-col bg-white border-r shadow-sm",
-    {
-      "w-64": expanded, // Full width
-      "w-20": !expanded, // Collapsed width
-    }
-  );
 
   return (
     <aside className={sidebarClasses}>
