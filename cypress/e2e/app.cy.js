@@ -1,6 +1,6 @@
 describe('Landing Page', () => { 
   it('should display the landing page', () => {
-    cy.visit('http://localhost:3000');
+    cy.visit('https://madison-timeline.vercel.app/');
     // Should contain the title
     cy.get('h1').should('contain', 'Welcome to Madison Timeline');
 
