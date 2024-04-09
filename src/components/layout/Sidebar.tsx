@@ -125,7 +125,7 @@ export default function Sidebar({ show, setter }: { show: boolean, setter: React
             !user ? (
             <>
             <Button>
-              <LoginLink postLoginRedirectURL="/loginpage">LOG IN</LoginLink>
+              <LoginLink >LOG IN</LoginLink>
             </Button>
             <Button>
               <RegisterLink postLoginRedirectURL="/profile">SIGN UP</RegisterLink>
