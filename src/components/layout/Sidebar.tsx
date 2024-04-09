@@ -27,38 +27,43 @@ type SidebarProps = {
   setter: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const [show, setShow] = useState<boolean>(false);
-
-<Sidebar show={show} setter={setShow} />;
-
-
-export default function Sidebar({ show, setter }: SidebarProps) {
-  const [expanded, setExpanded] = useState(true);
+export default function Sidebar({ show, setter }: { show: boolean, setter: React.Dispatch<React.SetStateAction<boolean>> }) {
   const { isLoading, user } = useKindeBrowserClient();
+  const [expanded, setExpanded] = useState(true);
 
-  const sidebarClasses = `h-screen flex flex-col bg-white border-r shadow-sm ${expanded ? "w-64" : "w-20"}`;
+  // Define our base class
+  const className = `h-screen flex flex-col bg-white border-r shadow-sm ${expanded ? "w-64" : "w-20"}`;
+  // Append class based on state of sidebar visiblity
+  const appendClass = show ? " ml-0" : " ml-[-250px] md:ml-0";
+
   const SidebarContext = createContext<SidebarContextType>({ expanded: true });
 
-  type MenuItemProps = {
-    icon: React.ReactNode;
-    name: string;
-    route: string;
-  };
-
-  const MenuItem = ({ icon, name, route }: MenuItemProps) => {
-    const menuItemClasses = `text-sm flex gap-1 items-center text-md p-3 border-b border-b-white/10 transition-colors duration-300 ease-in-out ${expanded ? "pl-6 py-3 hover:bg-[#C5050C] hover:text-white active:bg-[#C5050C] active:text-white" : "justify-center"}`;
-
+  
+  const MenuItem = ({ icon, name, route }: { icon: React.ReactNode, name: string, route: any }) => {
     return (
-<Link href={route} onClick={() => setter(oldVal => !oldVal)} className={menuItemClasses}>
+      <Link
+        href={route}
+        onClick={() => 
+            setter(oldVal => !oldVal)
+        }
+        className={`text-sm flex gap-1 items-center text-md p-3 border-b border-b-white/10 transition-colors duration-300 ease-in-out ${expanded ? "pl-6 py-3 hover:bg-[#C5050C] hover:text-white active:bg-[#C5050C] active:text-white" : "justify-center"}`}>
           <div className="text-xl small-icon">{icon}</div>
           {expanded && <div>{name}</div>}
       </Link>
     );
   };
-
+  
+  const ModalOverlay = () => (
+    <div
+        className={`flex md:hidden fixed top-0 right-0 bottom-0 left-0 bg-black/50 z-30`}
+        onClick={() => {
+            setter(oldVal => !oldVal);
+        }}
+    />
+  )
 
   return (
-    <aside className={sidebarClasses}>
+    <aside className={`${className}${appendClass}`}>
       <div className="p-4 pb-2 flex justify-between items-center">
         <Link href="/" className={`overflow-hidden transition-all ${expanded ? "w-50" : "w-0"} p-1`}>
             <Image src={logo} width={200} height={200} alt="Logo" />
