@@ -8,6 +8,7 @@ import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import PostPreview from "./PostPreview";
 import GuestPostPreview from "./GuestPostPreview";
 import { createClient } from "@/utils/supabase/client";
+import Link from "next/link";
 
 const supabase = createClient();
 
@@ -43,7 +44,7 @@ async function fetchPosts(boardname: string): Promise<Post[]> {
 function BoardView({ boardname }: { boardname: string }) {
     const [posts, setPosts] = useState<Post[]>([]);
     const [numPosts, setNumPosts] = useState(0);
-    const [createPostModal, setCreatePostModal] = useState(false);
+    // const [createPostModal, setCreatePostModal] = useState(false);
     const { isLoading, user } = useKindeBrowserClient();
 
     // Use effect to fetch posts on mount
@@ -64,17 +65,12 @@ function BoardView({ boardname }: { boardname: string }) {
             <div className="absolute right-5 bottom-0">
                 {!user ? (
                     <div className="text-red-500">You must be logged in to post</div>
-                ) : !createPostModal ? (
-                    <Button onClick={() => setCreatePostModal(true)} className="shadow-md mb-2">
-                        Create Post
-                    </Button>
                 ) : (
-                    <>
-                        <Button onClick={() => setCreatePostModal(false)} className="absolute right-3 top-3">
-                            X
+                    <Link href="/createPost">
+                        <Button className="shadow-md mb-2">
+                            Create Post
                         </Button>
-                        <CreatePost posts={posts} setPosts={setPosts} user={user} setter={setCreatePostModal} />
-                    </>
+                    </Link>
                 )}
             </div>
         </div>
