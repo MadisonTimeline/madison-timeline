@@ -93,14 +93,10 @@ export default function CreatePost({
                             <Label htmlFor="name">Title</Label>
                             <Input id="name" placeholder="Title" onChange={(e) => setPostTitle(e.target.value)} />
                         </div>
-                        <div>
+                        <div className="">
                             <Label htmlFor="body">Body</Label>
                             {/* Use the Editor component for the post body */}
-                            <Editor
-                                className=""
-                                defaultValue={postBody}
-                                onTextChange={(text) => setPostBody(text)}
-                                />
+                            <Editor></Editor>
                         </div>
                     </div>
                 </form>
