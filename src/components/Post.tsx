@@ -1,7 +1,7 @@
 // This is a component that will display a single post
 
 import React from 'react'
-import { Post } from '@/types/Post'
+import type {Post} from '@/types/Post'
 import { useEffect, useState } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
 import { Label } from './ui/label'

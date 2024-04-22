@@ -32,45 +32,44 @@ function BoardView({ boardname }: { boardname: string }) {
 
 
     useEffect(() => {
+        async function fetchAllPosts() {
+            const response = await fetch("/api/posts/get/all");
+            const data = await response.json();
+            if (response.ok) {
+                
+                // Convert the date string to a Date object
+                // for each post, set the date to a Date object
+                const fetchedPosts = data.map((post: any) => {
+                    post.date = new Date(post.date);
+                    return post;
+                } );
+                setPosts(fetchedPosts);
+                setNumPosts(data.length);
+                setTotalPages(Math.ceil(data.length / 10));
+                setIsLocalLoading(false);
+            } else {
+                setIsLocalLoading(false);
+            }
+        }
+        async function fetchPostsByBoard() {
+            const response = await fetch(`/api/posts/get/board_name/${boardname}`);
+            const data = await response.json();
+            if (response.ok) {
+                const fetchedPosts = data.map((post: any) => {
+                    post.date = new Date(post.date);
+                    return post;
+                } );
+                setPosts(fetchedPosts);
+                setNumPosts(data.length);
+                setTotalPages(Math.ceil(data.length / 10));
+                setIsLocalLoading(false);
+            } else {
+                setIsLocalLoading(false);
+            }
+        }
         if (boardname === "Main") {
-            async function fetchAllPosts() {
-                const response = await fetch("/api/posts/get/all");
-                const data = await response.json();
-                if (response.ok) {
-                    
-                    // Convert the date string to a Date object
-                    // for each post, set the date to a Date object
-                    const fetchedPosts = data.map((post: any) => {
-                        post.date = new Date(post.date);
-                        return post;
-                    } );
-                    setPosts(fetchedPosts);
-                    setNumPosts(data.length);
-                    setTotalPages(Math.ceil(data.length / 10));
-                    setIsLocalLoading(false);
-                } else {
-                    setIsLocalLoading(false);
-                }
-            }
             fetchAllPosts();
-
         } else {
-            async function fetchPostsByBoard() {
-                const response = await fetch(`/api/posts/get/board_name/${boardname}`);
-                const data = await response.json();
-                if (response.ok) {
-                    const fetchedPosts = data.map((post: any) => {
-                        post.date = new Date(post.date);
-                        return post;
-                    } );
-                    setPosts(fetchedPosts);
-                    setNumPosts(data.length);
-                    setTotalPages(Math.ceil(data.length / 10));
-                    setIsLocalLoading(false);
-                } else {
-                    setIsLocalLoading(false);
-                }
-            }
             fetchPostsByBoard();
         }
     }, [ boardname, numRefresh ]);

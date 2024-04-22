@@ -8,7 +8,7 @@ export async function GET(request: Request) {
         const { data, error } = await supabase
             .from("posts")
             .select("*")
-            .eq("author_id", receivedUserID);
+            .eq("author_id", receivedUserID)
             .order("date", { ascending: false });
 
         if (error) {
