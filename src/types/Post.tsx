@@ -1,4 +1,5 @@
 import { Comment } from "./Comment";
+import Delta from "quill-delta";
 
 // Type definition for a post
 export type Post = {
@@ -6,7 +7,7 @@ export type Post = {
   title: string;
   date: Date;
   board_names: string[];
-  body: string;
+  body: Delta;
   image?: string;
   likes: number;
   dislikes: number;

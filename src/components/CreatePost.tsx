@@ -7,6 +7,7 @@ import React, { useRef, useState } from 'react';
 import { v4 as uuidv4 } from "uuid";
 import SelectBoards from "./SelectBoards";
 import Editor from './Editor';
+import Delta from "quill-delta";
 
 export default function CreatePost({
     posts,
@@ -20,7 +21,7 @@ export default function CreatePost({
     setter: any;
 }) {
     const [postTitle, setPostTitle] = useState("");
-    const [postBody, setPostBody] = useState("");
+    const [postBody, setPostBody] = useState<Delta>(new Delta());
     const [selectedBoardname, setSelectedBoardname] = useState<string[]>([]);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -68,7 +69,7 @@ export default function CreatePost({
         }
 
         setPostTitle("");
-        setPostBody("");
+        // setPostBody();
         setter(false); // Close the modal
     };
 
@@ -96,7 +97,7 @@ export default function CreatePost({
                         <div className="">
                             <Label htmlFor="body">Body</Label>
                             {/* Use the Editor component for the post body */}
-                            <Editor></Editor>
+                            <Editor value={postBody} onChange={setPostBody} />
                         </div>
                     </div>
                 </form>
