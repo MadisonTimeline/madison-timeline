@@ -18,14 +18,14 @@ import ProfileAvatar from "@/components/ProfileAvatar";
 export default function PostPreview({
     post,
     user,
-    numPosts,
-    setNumPosts,
+    needRefresh,
+    setNeedRefresh,
 
 }: {
     post: Post;
     user: any;
-    numPosts: number;
-    setNumPosts: (numPosts: number) => void;
+    needRefresh: boolean;
+    setNeedRefresh: Function;
 }) {
     const [liked, setLiked] = useState(post.liked_users && post.liked_users.includes(user.id));
     const [disliked, setDisliked] = useState(post.disliked_users && post.disliked_users.includes(user.id));
@@ -92,7 +92,9 @@ export default function PostPreview({
             },
             body: JSON.stringify(requestData),
         });
-        setNumPosts(numPosts - 1);
+        if (!needRefresh) {
+            setNeedRefresh(true);
+        }
     }
 
     return (
