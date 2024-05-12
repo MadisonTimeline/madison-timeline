@@ -17,10 +17,10 @@ export async function GET(request: Request) {
 
         if (!data || data.length === 0) {
             return new Response(
-                JSON.stringify({ message: "Post not found" }),
+                JSON.stringify([]),
                 {
                     headers: { "Content-Type": "application/json" },
-                    status: 404
+                    status: 200
                 }
             );
         } else {

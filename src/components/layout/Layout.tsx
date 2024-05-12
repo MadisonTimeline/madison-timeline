@@ -10,11 +10,11 @@ export default function Layout({ pageTitle, children }: { pageTitle: string, chi
 
     return (
         <>
-            <div className="min-h-screen">
+            <div className="min-h-screen min-w-screen">
                 <div className="flex">
                     <MenuBarMobile setter={setShowSidebar} />
                     <Sidebar show={showSidebar} setter={setShowSidebar} />
-                    <div className="flex flex-col flex-grow bg-background w-screen md:w-full min-h-screen">
+                    <div className="flex flex-col flex-grow justify-center align-center bg-background w-screen md:w-full min-h-screen">
                         {children}
                     </div>
                 </div>
