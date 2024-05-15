@@ -1,11 +1,12 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import PostPreview from '../PostPreview';
+import { Post } from '@/types/Post';
 
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 export default function MyPostsList( ) {
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState<Post []>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [needReload, setNeedReload] = useState(false);
 
