@@ -114,7 +114,7 @@ export default function PostPreview({
                 </div>
             </CardHeader>
             <CardContent>
-                <p className="truncate"> {post.body}</p>
+                <p className="truncate max-w-[90%]"> {post.body}</p>
             </CardContent>
             <CardFooter className="flex items-center gap-2">
                 <Label> {views} VIEWS</Label>

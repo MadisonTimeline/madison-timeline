@@ -99,9 +99,20 @@ function BoardView({ boardname }: { boardname: string }) {
         }
     }
 
-    if (isLoading || isLocalLoading) return <div>Loading...</div>;
+    if (isLoading) return (
+        <div className = "flex flex-col justify-center align-center">
+            Fetching User Data...
+        </div>
+    )
+
+    if (isLocalLoading) return (
+        <div className=" flex flex-col justify-center align-center">
+            Fetching Posts...
+        </div>
+    );
+
     return (
-        <div className=" flex flex-col justify-center align-center m-10">
+        <div className=" flex flex-col justify-center align-center">
             {
                 activePosts && <Boardpage user={user} posts={activePosts} numRefresh={numRefresh} setNumRefresh={setNumRefresh} />
             }
