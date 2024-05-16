@@ -7,7 +7,6 @@ import Image from "next/image";
 import { User } from "@/types/User";
 
 export default function Profile({ user }: { user: any }) {
-
     const [familyName, setFamilyName] = useState(user.family_name);
     const [givenName, setGivenName] = useState(user.given_name);
     const [picture, setPicture] = useState(user.picture);
@@ -68,6 +67,8 @@ export default function Profile({ user }: { user: any }) {
             console.error("Error creating user");
         }
     }
+
+
 
     return (
         <div className="flex flex-col justify-center items-center">
