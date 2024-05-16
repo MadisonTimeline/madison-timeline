@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Layout from './Layout'
 import BoardView from '../BoardView'
 
 export default function BoardPage({ name }: { name: string }) {
@@ -37,15 +36,13 @@ export default function BoardPage({ name }: { name: string }) {
     }, [name])
 
     if (error) return (
-        <Layout pageTitle={boardName}>
+        <div>
             OOPS!! an error has occurred while retrieving board data.
-        </Layout>
+        </div>
+
     )
-    if (loading) return <Layout pageTitle={boardName}>Loading...</Layout>
+    if (loading) return <div>Loading...</div>
     return (
-        <Layout
-            pageTitle={boardName}
-        >
             <div className="min-h-screen flex flex-col">
                 <div className='flex flex-col p-5 bg-accent h-[100px]'>
                     <h1 className="text-4xl ">{boardName} Board</h1>
@@ -55,6 +52,5 @@ export default function BoardPage({ name }: { name: string }) {
                     <BoardView boardname={boardName} />
                 </div>
             </div>
-        </Layout>
     )
 }
