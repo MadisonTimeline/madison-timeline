@@ -4,17 +4,24 @@
 import { useState } from "react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Profile from "@/components/Profile";
+import Layout from "@/components/layout/NewLayout";
 
 export default function NewProfilePage() {
     const { user, isLoading, isAuthenticated } = useKindeBrowserClient();
-    
-    
 
-    if (isLoading) return <div>Loading...</div>;
-
-    if (isAuthenticated && user) {
+    if (!user) {
         return (
-            <Profile user={user} />
+            <Layout>
+                <div className="flex flex-col justify-center items-center">
+                    <div className="text-lg">You must be logged in to change profile info.</div>
+                </div>
+            </Layout>
+        );
+    } else {
+        return (
+            <Layout>
+                <Profile user={user} />
+            </Layout>
         );
     }
 }
