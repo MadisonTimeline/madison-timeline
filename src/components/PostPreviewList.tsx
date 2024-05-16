@@ -4,7 +4,7 @@ import { Post } from "@/types/Post";
 import PostPreview from "./PostPreview";
 import GuestPostPreview from "./GuestPostPreview";
 
-function BoardPage({ user, posts, numRefresh, setNumRefresh}: { user: any, posts: Post[], numRefresh: number, setNumRefresh: Function}) {
+function PostPreviewList({ user, posts, numRefresh, setNumRefresh}: { user: any, posts: Post[], numRefresh: number, setNumRefresh: Function}) {
     const [ needRefresh, setNeedRefresh ] = useState(false);
 
     useEffect(() => {
@@ -24,4 +24,4 @@ function BoardPage({ user, posts, numRefresh, setNumRefresh}: { user: any, posts
     );
 }
 
-export default BoardPage;
+export default PostPreviewList;

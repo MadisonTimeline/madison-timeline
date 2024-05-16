@@ -5,7 +5,7 @@ import { Post } from "@/types/Post";
 import CreatePost from "./CreatePost";
 import { Button } from "./ui/button";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import Boardpage from "./BoardPage";
+import PostPreviewList from "./PostPreviewList";
 import {
     Pagination,
     PaginationContent,
@@ -114,7 +114,7 @@ function BoardView({ boardname }: { boardname: string }) {
     return (
         <div className=" flex flex-col justify-center align-center">
             {
-                activePosts && <Boardpage user={user} posts={activePosts} numRefresh={numRefresh} setNumRefresh={setNumRefresh} />
+                activePosts && <PostPreviewList user={user} posts={activePosts} numRefresh={numRefresh} setNumRefresh={setNumRefresh} />
             }
             <div className="absolute right-5 bottom-0">
                 {!user ? (
