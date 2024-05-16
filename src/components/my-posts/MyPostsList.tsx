@@ -5,8 +5,8 @@ import { Post } from '@/types/Post';
 
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
-export default function MyPostsList( ) {
-    const [posts, setPosts] = useState<Post []>([]);
+export default function MyPostsList() {
+    const [posts, setPosts] = useState<Post[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [needReload, setNeedReload] = useState(false);
 
@@ -36,39 +36,37 @@ export default function MyPostsList( ) {
             }
         }
         fetchAllUserPosts();
-    }, [ user ]);
+    }, [user]);
 
     useEffect(() => {
         if (needReload) {
             setNeedReload(false);
         }
-    } , [needReload]);
+    }, [needReload]);
 
 
 
     if (!user) {
         return (
-            <div>
-                <p>You must be logged in to view your posts.</p>
+            <div className='flex flex-row justify-center align-center'>
+                <p className='text-xl'>You must be logged in to view your posts.</p>
             </div>
         )
     }
     if (isLoading) {
         return (
-            <div>
-                <p>Loading...</p>
+            <div className='flex flex-row justify-center align-center'>
+                <p className='text-xl'>Loading...</p>
             </div>
         )
     }
     return (
-        <div>
+        <div className='flex flex-row justify-center align-center'>
             {
                 posts.length === 0 && (
-                    <div>
-                        <p>You have not created any posts yet.</p>
-                    </div>
+                    <p className='text-xl'>You have not created any posts yet.</p>
                 )
-            
+
             }
             {posts.map((post) => <PostPreview key={post.id} post={post} user={user} needRefresh={needReload} setNeedRefresh={setNeedReload} />)}
         </div>

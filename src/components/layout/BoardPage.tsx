@@ -36,21 +36,24 @@ export default function BoardPage({ name }: { name: string }) {
     }, [name])
 
     if (error) return (
-        <div>
-            OOPS!! an error has occurred while retrieving board data.
+        <div className='flex flex-row justify-center align-center'>
+            <p className='text-xl'>OOPS!! an error has occurred while retrieving board data.</p>
         </div>
-
     )
-    if (loading) return <div>Loading...</div>
+    if (loading) return (
+        <div className='flex flex-row justify-center align-center'>
+            <p className='text-xl'>Loading...</p>
+        </div>
+    )
     return (
-            <div className="min-h-screen flex flex-col">
-                <div className='flex flex-col p-5 bg-accent h-[100px]'>
-                    <h1 className="text-4xl ">{boardName} Board</h1>
-                    <p>{description}</p>
-                </div>
-                <div>
-                    <BoardView boardname={boardName} />
-                </div>
+        <div className="min-h-screen flex flex-col">
+            <div className='flex flex-col p-5 bg-accent h-[100px]'>
+                <h1 className="text-4xl ">{boardName} Board</h1>
+                <p>{description}</p>
             </div>
+            <div>
+                <BoardView boardname={boardName} />
+            </div>
+        </div>
     )
 }

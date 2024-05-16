@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     const { isLoading, user } = useKindeBrowserClient();
 
     return (
-        <div className="min-h-screen min-w-screen">
+        <div className="min-h-screen min-w-screen max-w-screen">
             <div className="flex">
                 <MenuBarMobile setter={setShowSidebar} />
                 <Sidebar show={showSidebar} setter={setShowSidebar} />
