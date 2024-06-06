@@ -25,7 +25,7 @@ const navItems = [
     { icon: <SearchIcon />, text: "Explore Boards", href: "/explore-boards" },
     { icon: <NoteAltIcon />, text: "My Posts", href: "/my-posts" },
     { icon: <CommentIcon />, text: "My Comments", href: "/my-comments" },
-    { icon: <BookmarksIcon />, text: "My Favorite Boards", href: "/my-favorites" },
+    { icon: <BookmarksIcon />, text: "My Favorite Boards", href: "/my-favorite-boards" },
     { icon: <NotificationsIcon />, text: "Notification", href: "/notification" },
     { icon: <SettingsIcon />, text: "Setting", href: "/setting" },
 ];
