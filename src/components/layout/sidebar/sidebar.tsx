@@ -47,7 +47,7 @@ export const Sidebar = () => {
 
     }
 
-    const handleClickNavItem = (href) => {
+    const handleClickNavItem = (href:string) => {
         console.log("NavItem clicked");
         // go to home page
         window.location.href = href;
@@ -84,7 +84,7 @@ export const Sidebar = () => {
                     </header>
                     <nav>
                         {navItems.map((item) => (
-                            <button key={item} type="button" onClick={() => handleClickNavItem(item.href)}>
+                            <button key={item.href} type="button" onClick={() => handleClickNavItem(item.href)}>
                                 <span className="material-symbols-outlined" >{item.icon}</span>
                                 <p>{item.text}</p>
                             </button>
