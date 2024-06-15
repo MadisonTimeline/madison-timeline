@@ -67,7 +67,7 @@ function BoardView({ boardname }: { boardname: string }) {
                 setIsLocalLoading(false);
             }
         }
-        if (boardname === "Main") {
+        if (boardname === "Home") {
             fetchAllPosts();
         } else {
             fetchPostsByBoard();

@@ -20,7 +20,7 @@ import RegisterIcon from '@mui/icons-material/AssignmentInd';
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { useRouter } from "next/navigation";
 const navItems = [
-    { icon: <HomeRoundedIcon />, text: "Home", href: "/" },
+    { icon: <HomeRoundedIcon />, text: "Home", href: "/boards" },
     { icon: <AccountCircleRoundedIcon />, text: "Profile", href: "/profile" },
     { icon: <SearchIcon />, text: "Explore Boards", href: "/explore-boards" },
     { icon: <NoteAltIcon />, text: "My Posts", href: "/my-posts" },

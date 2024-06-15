@@ -6,7 +6,7 @@ import BoardPage from '@/components/layout/BoardPage'
 export default function BoardMainPage() {
     return (
         <Layout>
-            <BoardPage name="Main" />
+            <BoardPage name="Home" />
         </Layout>
     )
 }
