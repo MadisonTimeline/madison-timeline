@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import BoardView from '../BoardView'
+import SkeletonPost from '../SkeletonPost'
 
 export default function BoardPage({ name }: { name: string }) {
     const [boardName, setBoardName] = useState<string>("")
@@ -42,7 +43,7 @@ export default function BoardPage({ name }: { name: string }) {
     )
     if (loading) return (
         <div className='flex flex-row justify-center align-center'>
-            <p className='text-xl'>Loading...</p>
+            <SkeletonPost />
         </div>
     )
     return (

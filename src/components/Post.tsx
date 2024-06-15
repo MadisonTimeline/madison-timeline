@@ -1,9 +1,10 @@
 // This is a component that will display a single post
 
 import React from 'react'
-import type {Post} from '@/types/Post'
+import type { Post } from '@/types/Post'
 import { useEffect, useState } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
+import SkeletonPost from './SkeletonPost'
 import { Label } from './ui/label'
 import { Button } from './ui/button'
 import Link from 'next/link'
@@ -85,7 +86,7 @@ export default function Post({ post_id }: { post_id: string }) {
     }, [post_id]);
 
     async function handleDelete() {
-        if(!user) {
+        if (!user) {
             alert("You must be logged in to delete a post");
             return;
         }
@@ -105,7 +106,13 @@ export default function Post({ post_id }: { post_id: string }) {
     }
 
     if (loading) {
-        return <p>Loading...</p>;
+        return (
+
+            <div className='p-5'>
+
+                <SkeletonPost />
+            </div>
+        );
     }
     return (
         <>
@@ -130,18 +137,18 @@ export default function Post({ post_id }: { post_id: string }) {
                     }
 
                     {user && post.author_id === user.id && (
-                    <>
-                        <Link href={`/post/edit/${post.id}`} >
-                            <Button className="flex items-center gap-2" >
-                                <EditIcon />
-                            </Button>
-                        </Link>
+                        <>
+                            <Link href={`/post/edit/${post.id}`} >
+                                <Button className="flex items-center gap-2" >
+                                    <EditIcon />
+                                </Button>
+                            </Link>
 
-                        <Button className="flex items-center gap-2" onClick={handleDelete}>
-                            <DeleteIcon />
-                        </Button>
-                    </>
-                )}
+                            <Button className="flex items-center gap-2" onClick={handleDelete}>
+                                <DeleteIcon />
+                            </Button>
+                        </>
+                    )}
                 </CardFooter>
             </Card>
             <CommentSection post_id={post.id} showComments={showComments} />
