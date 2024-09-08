@@ -23,12 +23,12 @@ function BoardView({ boardname }: { boardname: string }) {
     const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const { isLoading, user } = useKindeBrowserClient();
-    const [ isLocalLoading, setIsLocalLoading ] = useState(true);
-    const [ numRefresh, setNumRefresh ] = useState(0);
+    const [isLocalLoading, setIsLocalLoading] = useState(true);
+    const [numRefresh, setNumRefresh] = useState(0);
 
     const activePosts = useMemo(() => {
         return posts.slice((currentPage - 1) * 10, currentPage * 10);
-    } , [posts, currentPage]);
+    }, [posts, currentPage]);
 
 
     useEffect(() => {
@@ -36,13 +36,13 @@ function BoardView({ boardname }: { boardname: string }) {
             const response = await fetch("/api/posts/get/all");
             const data = await response.json();
             if (response.ok) {
-                
+
                 // Convert the date string to a Date object
                 // for each post, set the date to a Date object
                 const fetchedPosts = data.map((post: any) => {
                     post.date = new Date(post.date);
                     return post;
-                } );
+                });
                 setPosts(fetchedPosts);
                 setNumPosts(data.length);
                 setTotalPages(Math.ceil(data.length / 10));
@@ -58,7 +58,7 @@ function BoardView({ boardname }: { boardname: string }) {
                 const fetchedPosts = data.map((post: any) => {
                     post.date = new Date(post.date);
                     return post;
-                } );
+                });
                 setPosts(fetchedPosts);
                 setNumPosts(data.length);
                 setTotalPages(Math.ceil(data.length / 10));
@@ -72,7 +72,7 @@ function BoardView({ boardname }: { boardname: string }) {
         } else {
             fetchPostsByBoard();
         }
-    }, [ boardname, numRefresh ]);
+    }, [boardname, numRefresh]);
 
     function handlePageChange(page: number) {
         if (page < 1 || page > totalPages) return;
@@ -100,7 +100,7 @@ function BoardView({ boardname }: { boardname: string }) {
     }
 
     if (isLoading) return (
-        <div className = "flex flex-col justify-center align-center">
+        <div className="flex flex-col justify-center align-center">
             Fetching User Data...
         </div>
     )
@@ -116,22 +116,34 @@ function BoardView({ boardname }: { boardname: string }) {
             {
                 activePosts && <PostPreviewList user={user} posts={activePosts} numRefresh={numRefresh} setNumRefresh={setNumRefresh} />
             }
-            <div className="absolute right-5 bottom-0">
+            <div className="fixed right-5 bottom-5">
                 {!user ? (
                     <div className="text-red-500">You must be logged in to post</div>
                 ) : !createPostModal ? (
-                    <Button onClick={() => setCreatePostModal(true)} className="shadow-md mb-2">
+                    <Button
+                        onClick={() => setCreatePostModal(true)}
+                        className="shadow-md mb-2 hover:bg-gray-700 hover:text-white transition duration-300 ease-in-out"
+                    >
                         Create Post
                     </Button>
                 ) : (
                     <>
-                        <Button onClick={() => setCreatePostModal(false)} className="absolute right-3 top-3">
+                        <Button
+                            onClick={() => setCreatePostModal(false)}
+                            className="absolute right-3 top-3"
+                        >
                             X
                         </Button>
-                        <CreatePost posts={posts} setPosts={setPosts} user={user} setter={setCreatePostModal} />
+                        <CreatePost
+                            posts={posts}
+                            setPosts={setPosts}
+                            user={user}
+                            setter={setCreatePostModal}
+                        />
                     </>
                 )}
             </div>
+
             <Pagination>
                 <PaginationPrevious onClick={handlePageChange(currentPage - 1)} />
                 <PaginationContent>

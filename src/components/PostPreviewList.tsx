@@ -15,7 +15,7 @@ function PostPreviewList({ user, posts, numRefresh, setNumRefresh}: { user: any,
     }, [needRefresh, numRefresh, setNumRefresh]);
           
     return (
-            <div className="h-[77vh] overflow-auto gap-3 xl:max-w-[calc(100vw-60px)] md:max-w-[calc(100vw-60px)] sm:max-w-[100vw]">
+            <div className=" overflow-auto gap-3 xl:max-w-[calc(100vw-60px)] md:max-w-[calc(100vw-60px)] sm:max-w-[100vw]">
                 {user
                     ? posts && posts.map((post) => <PostPreview key={post.id} post={post} user={user} needRefresh={needRefresh} setNeedRefresh={setNeedRefresh}/>)
                     : posts && posts.map((post) => <GuestPostPreview key={post.id} post={post} />)}
